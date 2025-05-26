@@ -1,0 +1,209 @@
+# Alacritty configuration file
+# See https://alacritty.org/config-alacritty.html for more options
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+# Window dimensions (changes require restart)
+dimensions = { columns = 100, lines = 30 }
+
+# Window position (changes require restart)
+# position = { x = 0, y = 0 }
+
+# Window padding (changes require restart)
+padding = { x = 8, y = 8 }
+
+# Allow terminal applications to change Alacritty's window title
+dynamic_title = true
+
+# Window decorations
+decorations = "full"
+
+# Startup Mode (changes require restart)
+startup_mode = "Windowed"
+
+# Window opacity as a floating point number from 0.0 to 1.0
+opacity = 0.95
+
+# Background blur
+blur = true
+
+# Window class (Linux/BSD only)
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[scrolling]
+# Maximum number of lines in the scrollback buffer
+history = 10000
+
+# Scrolling distance multiplier
+multiplier = 3
+
+[font]
+# Normal (roman) font face
+normal = { family = "Fira Code", style = "Regular" }
+
+# Bold font face
+bold = { family = "Fira Code", style = "Bold" }
+
+# Italic font face
+italic = { family = "Fira Code", style = "Regular" }
+
+# Bold italic font face
+bold_italic = { family = "Fira Code", style = "Bold" }
+
+# Point size
+size = 11.0
+
+# Offset is the extra space around each character
+offset = { x = 0, y = 0 }
+
+# Glyph offset determines the locations of the glyphs within their cells
+glyph_offset = { x = 0, y = 0 }
+
+# Use built-in font for box drawing characters
+builtin_box_drawing = true
+
+[colors]
+# Default colors
+[colors.primary]
+background = "{{bg_primary}}"
+foreground = "{{fg_primary}}"
+dim_foreground = "{{fg_secondary}}"
+bright_foreground = "{{fg_primary}}"
+
+# Cursor colors
+[colors.cursor]
+text = "{{bg_primary}}"
+cursor = "{{accent_blue}}"
+
+# Vi mode cursor colors
+[colors.vi_mode_cursor]
+text = "{{bg_primary}}"
+cursor = "{{accent_purple}}"
+
+# Selection colors
+[colors.selection]
+text = "CellForeground"
+background = "{{bg_tertiary}}"
+
+# Search colors
+[colors.search.matches]
+foreground = "{{bg_primary}}"
+background = "{{accent_yellow}}"
+
+[colors.search.focused_match]
+foreground = "{{bg_primary}}"
+background = "{{accent_green}}"
+
+# Keyboard regex hints
+[colors.hints.start]
+foreground = "{{bg_primary}}"
+background = "{{accent_yellow}}"
+
+[colors.hints.end]
+foreground = "{{bg_primary}}"
+background = "{{accent_cyan}}"
+
+# Line indicator
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+# Footer bar
+[colors.footer_bar]
+foreground = "{{fg_primary}}"
+background = "{{bg_secondary}}"
+
+# Normal colors
+[colors.normal]
+black = "{{bg_primary}}"
+red = "{{accent_red}}"
+green = "{{accent_green}}"
+yellow = "{{accent_yellow}}"
+blue = "{{accent_blue}}"
+magenta = "{{accent_purple}}"
+cyan = "{{accent_cyan}}"
+white = "{{fg_primary}}"
+
+# Bright colors
+[colors.bright]
+black = "{{bg_tertiary}}"
+red = "{{accent_red}}"
+green = "{{accent_green}}"
+yellow = "{{accent_yellow}}"
+blue = "{{accent_blue}}"
+magenta = "{{accent_purple}}"
+cyan = "{{accent_cyan}}"
+white = "{{fg_primary}}"
+
+# Dim colors
+[colors.dim]
+black = "{{bg_secondary}}"
+red = "{{accent_red}}"
+green = "{{accent_green}}"
+yellow = "{{accent_yellow}}"
+blue = "{{accent_blue}}"
+magenta = "{{accent_purple}}"
+cyan = "{{accent_cyan}}"
+white = "{{fg_secondary}}"
+
+[bell]
+# Bell animation
+animation = "EaseOutExpo"
+duration = 0
+color = "{{accent_yellow}}"
+
+[mouse]
+# Click settings
+#double_click = { threshold = 300 }
+#triple_click = { threshold = 300 }
+
+# If this is `true`, the cursor is temporarily hidden when typing
+hide_when_typing = true
+
+[keyboard]
+# Key bindings
+bindings = [
+    # Copy/Paste
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "C", mods = "Control|Shift", action = "Copy" },
+    { key = "Insert", mods = "Shift", action = "PasteSelection" },
+
+    # Search
+    { key = "F", mods = "Control|Shift", action = "SearchForward" },
+    { key = "B", mods = "Control|Shift", action = "SearchBackward" },
+
+    # Font size
+    { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+    { key = "Key0", mods = "Control", action = "ResetFontSize" },
+
+    # Scrolling
+    { key = "PageUp", mods = "Shift", action = "ScrollPageUp" },
+    { key = "PageDown", mods = "Shift", action = "ScrollPageDown" },
+    { key = "Home", mods = "Shift", action = "ScrollToTop" },
+    { key = "End", mods = "Shift", action = "ScrollToBottom" },
+
+    # Vi mode
+    { key = "Space", mods = "Shift|Control", action = "ToggleViMode" },
+
+    # New instance
+    { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+
+    # Quit
+    { key = "Q", mods = "Control|Shift", action = "Quit" },
+]
+
+[debug]
+# Display the time it takes to redraw each frame
+render_timer = false
+
+# Keep the log file after quitting Alacritty
+persistent_logging = false
+
+# Log level
+log_level = "Warn"
+
+# Print all received window events
+print_events = false

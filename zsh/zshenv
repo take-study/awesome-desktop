@@ -1,0 +1,24 @@
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Default applications
+export EDITOR="nvim"
+export VISUAL="nvim"
+export BROWSER="firefox"
+export TERMINAL="alacritty"
+
+# GPG configuration
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)" 2>/dev/null
+
+# Path additions
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export HTTP_PROXY="{{http_proxy}}"
+export HTTPS_PROXY="{{http_proxy}}"
+export http_proxy="{{http_proxy}}"
+export https_proxy="{{http_proxy}}"

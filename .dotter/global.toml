@@ -1,0 +1,56 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.variables]
+wallpaper = "~/Pictures/wallpaper/wall1.jpg"
+usegnupg = "1"
+
+[nvim.files]
+"nvim/init.lua" = "~/.config/nvim/init.lua"
+"nvim/lua" = "~/.config/nvim/lua"
+
+[alacritty.files]
+"alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
+
+[zsh.files]
+"zsh/zshrc" = "~/.zshrc"
+"zsh/zshenv" = "~/.zshenv"
+"zsh/conf" = "~/.config/zsh/conf"
+"zsh/plugins" = {target = "~/.config/zsh/plugins", type = "symbolic"}
+"zsh/local.zsh.example" = "~/.config/zsh/local.zsh.example"
+
+[hyprland]
+depends = ["alacritty", "dunst", "tofi", "tmux", "fcitx5"]
+
+[hyprland.files]
+"hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
+"hyprland/environment.conf" = "~/.config/hypr/environment.conf"
+"hyprland/variables.conf" = "~/.config/hypr/variables.conf"
+"hyprland/keybinds.conf" = "~/.config/hypr/keybinds.conf"
+"hyprland/autostart.conf" = "~/.config/hypr/autostart.conf"
+"hyprland/windowrules.conf" = "~/.config/hypr/windowrules.conf"
+"hyprland/hyprlock.conf" = "~/.config/hypr/hyprlock.conf"
+"hyprland/hypridle.conf" = "~/.config/hypr/hypridle.conf"
+"hyprland/hyprpaper.conf" = "~/.config/hypr/hyprpaper.conf"
+"wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
+"scripts/media-check.sh" = "~/.local/bin/media-check.sh"
+"scripts/volume-control.sh" = "~/.local/bin/volume-control.sh"
+
+[dunst.files]
+"dunst/dunstrc" = "~/.config/dunst/dunstrc"
+
+[tmux.files]
+"tmux/tmux.conf" = "~/.tmux.conf"
+
+[fcitx5.files]
+"fcitx5/config" = "~/.config/fcitx5/config"
+"fcitx5/profile" = "~/.config/fcitx5/profile"
+"fcitx5/conf" = "~/.config/fcitx5/conf"
+
+[tofi.files]
+"tofi/config" = "~/.config/tofi/config"
+
+[settings]
+default_target_type = "automatic"

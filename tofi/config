@@ -1,0 +1,55 @@
+# Tofi configuration file
+
+# Font - consistent with terminal
+font = monospace
+font-size = 12
+
+# Window properties - centered popup window
+width = 600
+height = 400
+border-width = 2
+outline-width = 0
+corner-radius = 8
+padding-left = 20
+padding-right = 20
+padding-top = 15
+padding-bottom = 15
+result-spacing = 5
+num-results = 10
+
+# Colors - coordinated with global theme variables
+background-color = {{bg_primary}}        # Dark background
+text-color = {{fg_primary}}              # Light text  
+prompt-color = {{accent_cyan}}           # Cyan like git branch
+selection-color = {{bg_primary}}         # Dark text on selection
+selection-background = {{accent_green}}  # Green like zsh insert mode
+border-color = {{accent_cyan}}           # Cyan border
+
+# Behavior
+multi-instance = false
+ascii-input = false
+
+# Text layout - vertical list, centered
+horizontal = false
+anchor = center
+margin-top = 0
+margin-bottom = 0
+margin-left = 0
+margin-right = 0
+clip-to-padding = true
+scale = true
+
+# Search and matching
+fuzzy-match = true
+require-match = true
+auto-accept-single = false
+hide-cursor = false
+history = true
+
+# Prompt text
+prompt-text = "❯ "
+
+# Performance
+use-cache = true
+
+# Key bindings are handled by the application itself

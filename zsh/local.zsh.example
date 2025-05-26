@@ -1,0 +1,33 @@
+# Local Zsh Configuration
+# This file is for your personal customizations
+# It's sourced last, so you can override any previous settings
+
+# Example: Add your own aliases
+# alias myalias='command'
+
+# Example: Set custom environment variables
+# export MY_VAR="value"
+
+# Example: Add custom functions
+# my_function() {
+#     echo "Hello from my function"
+# }
+
+# Example: Override prompt colors or style
+# You can modify any of the prompt components here
+
+# Example: Load additional plugins
+# if [[ -d "$ZSH_PLUGINS_DIR/my-plugin" ]]; then
+#     source "$ZSH_PLUGINS_DIR/my-plugin/my-plugin.zsh"
+# fi
+
+# Example: Custom key bindings
+# bindkey '^[t' my_custom_widget
+
+# Example: Work-specific configurations
+# if [[ "$(hostname)" == "work-machine" ]]; then
+#     export WORK_ENV="true"
+#     # Add work-specific settings here
+# fi
+
+# Note: This file is gitignored, so your personal settings won't be committed

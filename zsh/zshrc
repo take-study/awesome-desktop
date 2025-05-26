@@ -1,0 +1,39 @@
+# Zsh configuration file
+# Modern, modular zsh configuration with plugins and beautiful prompt
+
+# Configuration directory
+ZSH_CONFIG_DIR="${XDG_CONFIG_HOME}/zsh"
+
+# General shell options
+setopt AUTO_CD                    # Change directory just by typing directory name
+setopt GLOB_DOTS                  # Include dotfiles in globbing
+setopt EXTENDED_GLOB              # Use extended globbing syntax
+setopt NOMATCH                    # Show error if globbing fails
+setopt NOTIFY                     # Report status of background jobs immediately
+setopt HASH_LIST_ALL              # Hash command path before completion
+setopt COMPLETEALIASES            # Complete aliased commands
+setopt ALWAYS_TO_END              # Move cursor to end if word had one match
+setopt COMPLETE_IN_WORD           # Complete from both ends of a word
+setopt CORRECT                    # Auto correct mistakes
+setopt INTERACTIVECOMMENTS        # Allow comments in interactive mode
+setopt MAGICEQUALSUBST            # Enable filename expansion for arguments of the form 'anything=expression'
+setopt NONOMATCH                  # Hide error message if there is no match for the pattern
+setopt NOTIFY                     # Report status of background jobs immediately
+setopt NUMERICGLOBSORT            # Sort filenames numerically when it makes sense
+setopt PROMPTSUBST                # Enable command substitution in prompt
+
+# Load configuration modules
+source "$ZSH_CONFIG_DIR/conf/history.zsh"
+source "$ZSH_CONFIG_DIR/conf/plugins.zsh"
+source "$ZSH_CONFIG_DIR/conf/prompt.zsh"
+source "$ZSH_CONFIG_DIR/conf/keybinds.zsh"
+source "$ZSH_CONFIG_DIR/conf/aliases.zsh"
+{{#if (eq usegnupg "1")}}
+source "$ZSH_CONFIG_DIR/conf/gpg.zsh"
+{{/if}}
+
+# Load local configuration if it exists
+[[ -f "$ZSH_CONFIG_DIR/local.zsh" ]] && source "$ZSH_CONFIG_DIR/local.zsh"
+
+# Final message (optional, remove if you don't want it)
+# echo "🚀 Zsh loaded with plugins: autosuggestions, syntax-highlighting, completions"
