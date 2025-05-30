@@ -27,10 +27,10 @@
     separator_height = 2
     
     # Padding between text and separator
-    padding = 8
+    padding = 12
     
     # Horizontal padding
-    horizontal_padding = 8
+    horizontal_padding = 12
     
     # Padding between text and icon
     text_icon_padding = 0
@@ -49,13 +49,13 @@
     idle_threshold = 120
     
     # Font
-    font = Monospace 8
+    font = {{ui_font}} {{font_size_small}}
     
     # Allow a small subset of html markup
     markup = full
     
     # The format of the message
-    format = "<b>%s</b>\n%b"
+    format = "<b>%s</b>\n<span size='large'>%b</span>"
     
     # Alignment of message text
     alignment = left
@@ -92,7 +92,7 @@
     history_length = 20
     
     # dmenu path
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = tofi-drun
     
     # Browser for opening urls in context menu
     browser = /usr/bin/firefox
@@ -121,20 +121,55 @@
     per_monitor_dpi = false
 
 [urgency_low]
-    background = "{{bg_primary}}"
-    foreground = "{{fg_tertiary}}"
+    background = "{{bg_secondary}}"
+    foreground = "{{accent_blue}}"
+    frame_color = "{{accent_blue}}"
     timeout = 10
 
 [urgency_normal]
-    background = "{{accent_blue}}"
-    foreground = "{{fg_primary}}"
+    background = "{{bg_secondary}}"
+    foreground = "{{accent_blue}}"
+    frame_color = "{{accent_blue}}"
     timeout = 10
 
 [urgency_critical]
-    background = "{{error}}"
-    foreground = "{{fg_primary}}"
-    frame_color = "{{accent_red}}"
+    background = "{{bg_secondary}}"
+    foreground = "{{accent_red}}"
+    frame_color = "{{error}}"
     timeout = 0
+
+# Calculator notification styling
+[calculator]
+    appname = "Calculator"
+    background = "{{bg_secondary}}"
+    foreground = "{{accent_blue}}"
+    frame_color = "{{accent_blue}}"
+    timeout = 2
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    corner_radius = 8
+
+# Calculator error styling
+[calculator_error]
+    appname = "Calculator Error"
+    background = "{{bg_secondary}}"
+    foreground = "{{accent_red}}"
+    frame_color = "{{error}}"
+    timeout = 8
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    corner_radius = 8
+
+# Calculator tip styling
+[calculator_tip]
+    appname = "Calculator Tip"
+    background = "{{bg_tertiary}}"
+    foreground = "{{accent_blue}}"
+    frame_color = "{{accent_blue}}"
+    timeout = 3
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    corner_radius = 8
 
 # Volume notification styling
 [volume]

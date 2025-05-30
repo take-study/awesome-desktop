@@ -24,7 +24,7 @@ decorations = "full"
 startup_mode = "Windowed"
 
 # Window opacity as a floating point number from 0.0 to 1.0
-opacity = 0.95
+opacity = 1.0
 
 # Background blur
 blur = true
@@ -41,19 +41,19 @@ multiplier = 3
 
 [font]
 # Normal (roman) font face
-normal = { family = "Fira Code", style = "Regular" }
+normal = { family = "{{font}}", style = "Regular" }
 
 # Bold font face
-bold = { family = "Fira Code", style = "Bold" }
+bold = { family = "{{font}}", style = "Bold" }
 
 # Italic font face
-italic = { family = "Fira Code", style = "Regular" }
+italic = { family = "{{font}}", style = "Regular" }
 
 # Bold italic font face
-bold_italic = { family = "Fira Code", style = "Bold" }
+bold_italic = { family = "{{font}}", style = "Bold" }
 
 # Point size
-size = 11.0
+size = {{font_size}}
 
 # Offset is the extra space around each character
 offset = { x = 0, y = 0 }

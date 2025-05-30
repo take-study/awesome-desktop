@@ -51,8 +51,7 @@ send_notification() {
         else
             progress_bar+="░"
         fi
-    done
-    
+    done 
     # Send notification using dunst
     dunstify -a "Volume Control" \
              -u normal \

@@ -5,7 +5,13 @@ depends = []
 
 [default.variables]
 wallpaper = "~/Pictures/wallpaper/wall1.jpg"
-usegnupg = "1"
+font = "Fira Code"
+ui_font = "MonoSpace"
+font_size = "11"
+font_size_small = "8"
+font_size_medium = "12"
+font_size_large = "25"
+font_size_xlarge = "55"
 
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
@@ -13,6 +19,9 @@ usegnupg = "1"
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
+
+[zsh.variables]
+usegnupg = "1"
 
 [zsh.files]
 "zsh/zshrc" = "~/.zshrc"
@@ -23,6 +32,15 @@ usegnupg = "1"
 
 [hyprland]
 depends = ["alacritty", "dunst", "tofi", "tmux", "fcitx5"]
+
+[hyprland.variables]
+# Unicode prompt icons for different purposes:
+# 🚀 App launcher | 📋 Clipboard | 🧮 Calculator | 📊 Result | ⚠️ Error | ❯ General
+prompt_text = "Run:"           # App launcher (tofi-drun)
+clipboard_prompt = "Clipboard:"      # Clipboard manager  
+calc_prompt = "Calculator:"          # Calculator input
+result_prompt = "Result:"        # Calculator result
+error_prompt = "Error:"         # Calculator error
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
@@ -37,6 +55,7 @@ depends = ["alacritty", "dunst", "tofi", "tmux", "fcitx5"]
 "wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
 "scripts/media-check.sh" = "~/.local/bin/media-check.sh"
 "scripts/volume-control.sh" = "~/.local/bin/volume-control.sh"
+"scripts/tofi-calc.sh" = "~/.local/bin/tofi-calc.sh"
 
 [dunst.files]
 "dunst/dunstrc" = "~/.config/dunst/dunstrc"

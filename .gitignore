@@ -1,0 +1,29 @@
+# Dotter-rust specific files
+.dotter/local.toml
+.dotter/cache.toml
+.dotter/cache/
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Machine-specific configurations
+local.zsh
+*.local

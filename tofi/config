@@ -1,13 +1,18 @@
 # Tofi configuration file
 
 # Font - consistent with terminal
-font = monospace
-font-size = 12
+font = {{font}}
+font-size = {{font_size_medium}}
+
+# Performance optimization
+hint-font = true
+ascii-input = false
+late-keyboard-init = false
 
 # Window properties - centered popup window
 width = 600
-height = 400
-border-width = 2
+height = 350
+border-width = 0
 outline-width = 0
 corner-radius = 8
 padding-left = 20
@@ -15,19 +20,18 @@ padding-right = 20
 padding-top = 15
 padding-bottom = 15
 result-spacing = 5
-num-results = 10
+num-results = 11
 
 # Colors - coordinated with global theme variables
-background-color = {{bg_primary}}        # Dark background
-text-color = {{fg_primary}}              # Light text  
-prompt-color = {{accent_cyan}}           # Cyan like git branch
-selection-color = {{bg_primary}}         # Dark text on selection
-selection-background = {{accent_green}}  # Green like zsh insert mode
-border-color = {{accent_cyan}}           # Cyan border
+background-color = {{bg_primary}}        
+text-color = {{fg_primary}}              
+prompt-color = {{accent_cyan}}           
+selection-color = {{bg_primary}}         
+selection-background = {{accent_green}}  
+border-color = {{border_active}}         
 
 # Behavior
 multi-instance = false
-ascii-input = false
 
 # Text layout - vertical list, centered
 horizontal = false
@@ -39,17 +43,19 @@ margin-right = 0
 clip-to-padding = true
 scale = true
 
-# Search and matching
-fuzzy-match = true
+# Search and matching - using new syntax instead of deprecated fuzzy-match
+matching-algorithm = fuzzy
 require-match = true
 auto-accept-single = false
 hide-cursor = false
 history = true
 
-# Prompt text
-prompt-text = "❯ "
+# Text cursor
+text-cursor = false
 
-# Performance
-use-cache = true
+prompt-padding = 1
 
-# Key bindings are handled by the application itself
+# Performance and behavior settings
+physical-keybindings = true
+print-index = false
+drun-launch = true
