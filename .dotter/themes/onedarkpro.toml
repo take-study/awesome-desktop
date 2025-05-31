@@ -1,5 +1,5 @@
 [default.variables]
-# Theme: onedarkpro-darker
+# Global color scheme variables (OneDarkPro theme)
 bg_primary = "#0C0E15"
 bg_secondary = "#1E2127"
 bg_tertiary = "#282C34"
@@ -20,7 +20,11 @@ error = "#E06C75"
 info = "#61AFEF"
 border_active = "#61AFEF"
 border_inactive = "#282C34"
+border_default = "#282C34"
 shadow = "#0a0c12"
+hover = "#282C34"
+accent_alt = "#4a90e2"
+fg_disabled = "#5C6370"
 # Hyprland specific (without #)
 hypr_border_active = "61AFEF"
 hypr_border_inactive = "282C34"

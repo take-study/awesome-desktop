@@ -1,0 +1,17 @@
+# GIMP specific GTK 2.0 styles
+
+style "gimp-toolbox" {
+    bg[NORMAL] = @bg_color
+    engine "murrine" {
+        roundness = 0
+        contrast = 0.8
+    }
+}
+
+style "gimp-dock" {
+    bg[NORMAL] = @bg_color
+    engine "murrine" {
+        roundness = 0
+        contrast = 0.8
+    }
+}

@@ -1,0 +1,444 @@
+/* AweSome GTK 3.0 Theme
+ * A modern dark theme with blue accents
+ * Uses global color variables from dotter configuration (OneDarkPro theme)
+ */
+
+/* Color definitions using global variables */
+@define-color theme_bg_color {{bg_primary}};
+@define-color theme_fg_color {{fg_primary}};
+@define-color theme_base_color {{bg_secondary}};
+@define-color theme_text_color {{fg_primary}};
+@define-color theme_selected_bg_color {{accent_blue}};
+@define-color theme_selected_fg_color {{bg_primary}};
+@define-color theme_tooltip_bg_color {{bg_tertiary}};
+@define-color theme_tooltip_fg_color {{fg_primary}};
+
+/* Additional color definitions */
+@define-color bg_color {{bg_primary}};
+@define-color fg_color {{fg_primary}};
+@define-color base_color {{bg_secondary}};
+@define-color text_color {{fg_primary}};
+@define-color selected_bg_color {{accent_blue}};
+@define-color selected_fg_color {{bg_primary}};
+@define-color tooltip_bg_color {{bg_tertiary}};
+@define-color tooltip_fg_color {{fg_primary}};
+
+/* Border and accent colors */
+@define-color borders {{border_inactive}};
+@define-color unfocused_borders {{border_inactive}};
+@define-color warning_color {{warning}};
+@define-color error_color {{error}};
+@define-color success_color {{success}};
+
+/* Button and selection colors */
+@define-color button_bg_color {{bg_secondary}};
+@define-color button_fg_color {{fg_primary}};
+@define-color button_border_color {{border_inactive}};
+@define-color button_hover_bg_color {{bg_tertiary}};
+@define-color button_active_bg_color {{accent_blue}};
+@define-color button_active_fg_color {{bg_primary}};
+
+/* Headerbar colors */
+@define-color headerbar_bg_color {{bg_secondary}};
+@define-color headerbar_fg_color {{fg_primary}};
+@define-color headerbar_border_color {{border_inactive}};
+@define-color headerbar_backdrop_color {{bg_primary}};
+@define-color headerbar_shade_color {{bg_primary}};
+
+/* Sidebar colors */
+@define-color sidebar_bg_color {{bg_primary}};
+@define-color sidebar_fg_color {{fg_secondary}};
+@define-color sidebar_border_color {{border_inactive}};
+
+/* =============================================================================
+ * Window Border Removal
+ * Remove window decorations and borders
+ * ============================================================================= */
+
+/* Remove window decorations and borders */
+window,
+window.csd,
+window.solid-csd {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove decoration borders */
+decoration {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove window frame borders */
+.window-frame,.window-frame:backdrop {
+    border: none;
+    border-style: none;
+    border-radius: 0 0 0 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Remove titlebar borders while preserving functionality */
+.titlebar,
+headerbar.titlebar {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+/* Ensure no borders on maximized/tiled windows */
+.maximized decoration,
+.tiled decoration,
+.fullscreen decoration {
+    border: none;
+    box-shadow: none;
+}
+
+/* Remove any remaining window borders */
+window > decoration {
+    border: none;
+    box-shadow: none;
+}
+
+/* End window border removal */
+
+/* =============================================================================
+ * Main Theme Styles
+ * ============================================================================= */
+
+/* Global styles */
+* {
+    outline-color: {{accent_blue}};
+    outline-style: dashed;
+    outline-offset: -3px;
+    outline-width: 1px;
+    -gtk-outline-radius: 2px;
+}
+
+/* Window styles */
+window {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+/* Button styles */
+button {
+    background-color: @button_bg_color;
+    color: @button_fg_color;
+    border: 1px solid @button_border_color;
+    border-radius: 3px;
+    padding: 6px 12px;
+    min-height: 24px;
+}
+
+button:hover {
+    background-color: @button_hover_bg_color;
+}
+
+button:active,
+button:checked {
+    background-color: @button_active_bg_color;
+    color: @button_active_fg_color;
+}
+
+button:disabled {
+    background-color: @theme_bg_color;
+    color: {{fg_tertiary}};
+    border-color: {{fg_tertiary}};
+}
+
+/* Entry/Input styles */
+entry {
+    background-color: @base_color;
+    color: @text_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    padding: 6px;
+    min-height: 32px;
+}
+
+entry:focus {
+    border-color: @selected_bg_color;
+    box-shadow: inset 0 0 0 1px @selected_bg_color;
+}
+
+entry:disabled {
+    background-color: @theme_bg_color;
+    color: {{fg_tertiary}};
+    border-color: {{fg_tertiary}};
+}
+
+/* Headerbar styles */
+headerbar {
+    background-color: @headerbar_bg_color;
+    color: @headerbar_fg_color;
+    border-bottom: 1px solid @headerbar_border_color;
+    min-height: 46px;
+    padding: 0 6px;
+}
+
+headerbar:backdrop {
+    background-color: @headerbar_backdrop_color;
+}
+
+headerbar button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+headerbar button:hover {
+    background-color: @button_hover_bg_color;
+    border-color: @button_border_color;
+}
+
+headerbar button:active,
+headerbar button:checked {
+    background-color: @button_active_bg_color;
+    color: @button_active_fg_color;
+}
+
+/* Menu styles */
+menu,
+.menu {
+    background-color: @base_color;
+    color: @text_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    padding: 4px 0;
+}
+
+menuitem,
+.menuitem {
+    padding: 6px 12px;
+    border-radius: 0;
+}
+
+menuitem:hover,
+.menuitem:hover {
+    background-color: @selected_bg_color;
+    color: @selected_fg_color;
+}
+
+menuitem:disabled,
+.menuitem:disabled {
+    color: {{fg_tertiary}};
+}
+
+/* Notebook/Tab styles */
+notebook {
+    background-color: @theme_bg_color;
+}
+
+notebook header {
+    background-color: @headerbar_bg_color;
+    border-bottom: 1px solid @borders;
+}
+
+notebook tab {
+    background-color: transparent;
+    color: @theme_fg_color;
+    border: 1px solid transparent;
+    border-radius: 3px 3px 0 0;
+    padding: 6px 12px;
+}
+
+notebook tab:hover {
+    background-color: @button_hover_bg_color;
+}
+
+notebook tab:checked {
+    background-color: @theme_bg_color;
+    border-color: @borders;
+    border-bottom-color: @theme_bg_color;
+}
+
+/* Scrollbar styles */
+scrollbar {
+    background-color: @theme_bg_color;
+    border: none;
+}
+
+scrollbar slider {
+    background-color: @button_bg_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+scrollbar slider:hover {
+    background-color: @button_hover_bg_color;
+}
+
+scrollbar slider:active {
+    background-color: @selected_bg_color;
+}
+
+/* Treeview styles */
+treeview {
+    background-color: @base_color;
+    color: @text_color;
+}
+
+treeview:selected {
+    background-color: @selected_bg_color;
+    color: @selected_fg_color;
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: @sidebar_bg_color;
+    color: @sidebar_fg_color;
+    border-right: 1px solid @sidebar_border_color;
+}
+
+.sidebar row {
+    padding: 6px 12px;
+}
+
+.sidebar row:selected {
+    background-color: @selected_bg_color;
+    color: @theme_fg_color;
+}
+
+/* Tooltip styles */
+tooltip {
+    background-color: @tooltip_bg_color;
+    color: @tooltip_fg_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    padding: 6px;
+}
+
+/* Progress bar styles */
+progressbar {
+    background-color: @base_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+}
+
+progressbar progress {
+    background-color: @selected_bg_color;
+    border-radius: 2px;
+}
+
+/* Check and radio button styles */
+check,
+radio {
+    background-color: @base_color;
+    color: @text_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+check:checked,
+radio:checked {
+    background-color: @selected_bg_color;
+    color: @selected_fg_color;
+}
+
+check:disabled,
+radio:disabled {
+    background-color: @theme_bg_color;
+    color: {{fg_tertiary}};
+    border-color: {{fg_tertiary}};
+}
+
+/* Switch styles */
+switch {
+    background-color: @base_color;
+    border: 1px solid @borders;
+    border-radius: 12px;
+    min-width: 48px;
+    min-height: 24px;
+}
+
+switch:checked {
+    background-color: @selected_bg_color;
+}
+
+switch slider {
+    background-color: @button_bg_color;
+    border: 1px solid @borders;
+    border-radius: 50%;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+switch:checked slider {
+    background-color: @selected_fg_color;
+}
+
+/* Scale/Slider styles */
+scale {
+    min-height: 10px;
+    min-width: 10px;
+}
+
+scale trough {
+    background-color: @base_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    min-height: 4px;
+    min-width: 4px;
+}
+
+scale highlight {
+    background-color: @selected_bg_color;
+    border-radius: 2px;
+}
+
+scale slider {
+    background-color: @button_bg_color;
+    border: 1px solid @borders;
+    border-radius: 50%;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+scale slider:hover {
+    background-color: @button_hover_bg_color;
+}
+
+scale slider:active {
+    background-color: @selected_bg_color;
+}
+
+/* Selection styles */
+selection {
+    background-color: @selected_bg_color;
+    color: @selected_fg_color;
+}
+
+/* Infobar styles */
+.info {
+    background-color: @selected_bg_color;
+    color: @selected_fg_color;
+}
+
+.warning {
+    background-color: @warning_color;
+    color: @theme_bg_color;
+}
+
+.error {
+    background-color: @error_color;
+    color: @theme_bg_color;
+}
+
+.success {
+    background-color: @success_color;
+    color: @theme_bg_color;
+}

@@ -1,0 +1,8 @@
+# OpenOffice/LibreOffice specific GTK 2.0 styles
+
+style "openoffice-toolbar" {
+    engine "murrine" {
+        roundness = 0
+        contrast = 0.6
+    }
+}

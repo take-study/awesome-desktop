@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=AweSome
+Comment=A modern dark theme with blue accents
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=AweSome
+MetacityTheme=AweSome
+IconTheme=Adwaita
+CursorTheme=default
+ButtonLayout=close,minimize,maximize:menu

@@ -1,0 +1,9 @@
+# Firefox specific GTK 2.0 styles
+
+style "firefox-menu-item" {
+    bg[PRELIGHT] = @selected_bg_color
+    fg[PRELIGHT] = @selected_fg_color
+    engine "murrine" {
+        roundness = 0
+    }
+}
