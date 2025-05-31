@@ -12,28 +12,82 @@ zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:git:*' formats ' %F{cyan}%b%f%c%u%m'
 zstyle ':vcs_info:git:*' actionformats ' %F{cyan}%b|%a%f%c%u%m'
 
-# Function to get git change counts
+# Simple and Clean Zsh Prompt with Performance Optimizations
+setopt PROMPT_SUBST
+
+# Load git info
+autoload -Uz vcs_info
+
+# Configure git info with optimized settings
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
+zstyle ':vcs_info:git:*' formats ' %F{cyan}%b%f%c%u%m'
+zstyle ':vcs_info:git:*' actionformats ' %F{cyan}%b|%a%f%c%u%m'
+
+# Cache variables for git information
+typeset -g _git_cache_dir=""
+typeset -g _git_cache_info=""
+typeset -g _git_cache_counts=""
+typeset -g _git_cache_time=0
+
+# Function to get git change counts with caching
 git_change_counts() {
-    if git rev-parse --git-dir > /dev/null 2>&1; then
-        local staged=$(git diff --cached --name-only | wc -l)
-        local unstaged=$(git diff --name-only | wc -l)
-        local untracked=$(git ls-files --others --exclude-standard | wc -l)
-        
-        local counts=""
-        [[ $staged -gt 0 ]] && counts+=" %F{green}+$staged%f"
-        [[ $unstaged -gt 0 ]] && counts+=" %F{red}~$unstaged%f"
-        [[ $untracked -gt 0 ]] && counts+=" %F{yellow}?$untracked%f"
-        
-        echo "$counts"
+    local current_dir="$PWD"
+    local current_time="$EPOCHSECONDS"
+    
+    # Check if we're in the same git repo and cache is fresh (within 5 seconds)
+    if [[ "$_git_cache_dir" == "$current_dir" && $(( current_time - _git_cache_time )) -lt 5 ]]; then
+        echo "$_git_cache_counts"
+        return
     fi
+    
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        _git_cache_dir=""
+        _git_cache_counts=""
+        return
+    fi
+    
+    # Update cache
+    _git_cache_dir="$current_dir"
+    _git_cache_time="$current_time"
+    
+    # Use git status porcelain for efficient change detection
+    local git_status
+    git_status=$(git status --porcelain 2>/dev/null) || {
+        _git_cache_counts=""
+        echo ""
+        return
+    }
+    
+    local staged=0 unstaged=0 untracked=0
+    
+    # Parse git status output efficiently
+    while IFS= read -r line; do
+        case "${line:0:2}" in
+            "??") ((untracked++)) ;;
+            ?M|?D|?T) ((unstaged++)) ;;
+            M?|A?|D?|R?|C?|T?) ((staged++)) ;;
+            MM|MD|AM|AD) ((staged++)); ((unstaged++)) ;;
+        esac
+    done <<< "$git_status"
+    
+    local counts=""
+    [[ $staged -gt 0 ]] && counts+=" %F{green}+$staged%f"
+    [[ $unstaged -gt 0 ]] && counts+=" %F{red}~$unstaged%f"  
+    [[ $untracked -gt 0 ]] && counts+=" %F{yellow}?$untracked%f"
+    
+    _git_cache_counts="$counts"
+    echo "$counts"
 }
 
-# Function to display path with smart truncation
+# Function to display path with smart truncation (optimized)
 colored_path() {
     local current_path="$PWD"
-    local home_path="$HOME"
-    local max_length=40  # Maximum path length before truncation
-    local max_dirs=3     # Maximum number of directory components to show
+    local max_length=40
+    local max_dirs=3
     
     # Check for compact mode
     if [[ "$ZSH_PROMPT_COMPACT" == "true" ]]; then
@@ -41,17 +95,8 @@ colored_path() {
         max_dirs=2
     fi
     
-    # Determine ellipsis character based on terminal capabilities
-    local ellipsis="…"
-    if [[ -z "$DISPLAY" && -z "$WAYLAND_DISPLAY" && "$TERM" != *"256color"* ]] || \
-       [[ "$TERM" == "linux" || "$TERM" == "vt100" || "$TERM" == "vt220" || "$TERM" == "dumb" ]]; then
-        ellipsis="..."
-    fi
-    
-    # Replace home with ~
-    if [[ "$current_path" == "$home_path"* ]]; then
-        current_path="~${current_path#$home_path}"
-    fi
+    # Replace home with ~ (using parameter expansion for speed)
+    current_path="${current_path/#$HOME/~}"
     
     # If path is short enough, show it as is
     if [[ ${#current_path} -le $max_length ]]; then
@@ -59,137 +104,115 @@ colored_path() {
         return
     fi
     
-    # Split path into components
-    local -a path_parts
-    IFS='/' read -A path_parts <<< "$current_path"
+    # Determine ellipsis character (cached check)
+    local ellipsis="…"
+    if [[ -z "$DISPLAY$WAYLAND_DISPLAY" ]] || [[ "$TERM" == @(linux|vt100|vt220|dumb) ]]; then
+        ellipsis="..."
+    fi
+    
+    # Split path using zsh arrays (faster than IFS)
+    local -a path_parts=(${(s:/:)current_path})
     
     # If we have too many components, truncate from the beginning
     if [[ ${#path_parts} -gt $max_dirs ]]; then
         local truncated_path=""
         local start_index=$((${#path_parts} - $max_dirs + 1))
         
-        # Add ellipsis for truncated parts
-        if [[ "${path_parts[1]}" == "~" ]]; then
-            truncated_path="~/"
-            start_index=$((start_index + 1))
+        # Handle root vs home paths
+        if [[ "$current_path" == "~"* ]]; then
+            truncated_path="~/$ellipsis/"
         else
-            truncated_path="/"
+            truncated_path="/$ellipsis/"
         fi
-        truncated_path+="$ellipsis/"
         
         # Add the last few components
-        for i in {$start_index..${#path_parts}}; do
-            if [[ -n "${path_parts[i]}" ]]; then
-                truncated_path+="${path_parts[i]}"
-                if [[ $i -lt ${#path_parts} ]]; then
-                    truncated_path+="/"
-                fi
-            fi
-        done
-        
+        truncated_path+="${(j:/:)path_parts[$start_index,-1]}"
         echo "%F{blue}$truncated_path%f"
     else
-        # Path has few components but is long, truncate individual components
-        local truncated_path=""
-        local max_component_length=15
+        # Simple truncation for fewer components
+        local max_component=15
+        local -a truncated_parts=()
         
-        for i in {1..${#path_parts}}; do
-            local component="${path_parts[i]}"
-            
-            # Skip empty components (from leading /)
-            if [[ -z "$component" ]]; then
-                continue
+        for part in "${path_parts[@]}"; do
+            if [[ -n "$part" && ${#part} -gt $max_component ]]; then
+                truncated_parts+=("${part:0:$((max_component-${#ellipsis}))}$ellipsis")
+            else
+                truncated_parts+=("$part")
             fi
-            
-            # Truncate long components
-            if [[ ${#component} -gt $max_component_length ]]; then
-                component="${component:0:$((max_component_length-${#ellipsis}))}$ellipsis"
-            fi
-            
-            if [[ -n "$truncated_path" && "$truncated_path" != "/" && "$truncated_path" != "~" ]]; then
-                truncated_path+="/"
-            fi
-            truncated_path+="$component"
         done
         
-        echo "%F{blue}$truncated_path%f"
+        echo "%F{blue}${(j:/:)truncated_parts}%f"
     fi
 }
 
-# Function to get vi mode indicator with fallback for non-GUI environments
+# Function to get vi mode indicator (optimized with static detection)
 vi_mode_indicator() {
-    # Check if we're in a graphical environment or have unicode support
-    local use_unicode=true
-    
-    # Detect non-graphical environments
-    if [[ -z "$DISPLAY" && -z "$WAYLAND_DISPLAY" && "$TERM" != *"256color"* ]]; then
-        use_unicode=false
+    # Static unicode detection (only check once)
+    if [[ -z "$_prompt_unicode_support" ]]; then
+        if [[ -n "$DISPLAY$WAYLAND_DISPLAY" ]] && [[ "$TERM" != @(linux|vt100|vt220|screen|dumb) ]]; then
+            _prompt_unicode_support=1
+        else
+            _prompt_unicode_support=0
+        fi
     fi
     
-    # Check for common non-unicode terminals
-    case "$TERM" in
-        linux|vt100|vt220|screen|dumb)
-            use_unicode=false
-            ;;
-    esac
-    
-    # Use appropriate symbols based on environment
-    if [[ "$use_unicode" == "true" ]]; then
-        # Unicode arrows for modern terminals
+    # Use appropriate symbols
+    if [[ "$_prompt_unicode_support" -eq 1 ]]; then
         case ${KEYMAP:-main} in
-            vicmd) echo "%F{red}❯%f";;      # Normal mode: red arrow
-            viins|main) echo "%F{green}❯%f";; # Insert mode: green arrow
-            *) echo "%F{green}❯%f";;        # Default: green arrow
+            vicmd) echo "%F{red}❯%f";;
+            *) echo "%F{green}❯%f";;
         esac
     else
-        # ASCII fallback for basic terminals
         case ${KEYMAP:-main} in
-            vicmd) echo "%F{red}>%f";;       # Normal mode: red >
-            viins|main) echo "%F{green}>%f";; # Insert mode: green >
-            *) echo "%F{green}>%f";;         # Default: green >
+            vicmd) echo "%F{red}>%f";;
+            *) echo "%F{green}>%f";;
         esac
     fi
 }
 
-# Update git info before each prompt
+# Optimized precmd with reduced git calls
 precmd() {
-    vcs_info
-    # Add git change counts to vcs_info
-    if git rev-parse --git-dir > /dev/null 2>&1; then
+    # Only update vcs_info if we're in a git repository
+    if git rev-parse --git-dir >/dev/null 2>&1; then
+        vcs_info
         vcs_info_msg_0_+="$(git_change_counts)"
+    else
+        vcs_info_msg_0_=""
     fi
 }
 
-# Vi mode keymap change handler
+# Optimized vi mode keymap handler
 function zle-keymap-select {
-    # Update cursor shape
-    case $KEYMAP in
-        vicmd) echo -ne '\e[1 q';;      # block cursor for normal mode
-        viins|main) echo -ne '\e[5 q';; # beam cursor for insert mode
-    esac
-    # Redraw prompt to update mode indicator
+    # Update cursor shape only if in supported terminal
+    if [[ "$TERM" != @(linux|vt100|vt220|dumb) ]]; then
+        case $KEYMAP in
+            vicmd) echo -ne '\e[1 q';;      # block cursor
+            *) echo -ne '\e[5 q';;          # beam cursor
+        esac
+    fi
     zle reset-prompt
 }
 zle -N zle-keymap-select
 
-# Initialize with insert mode cursor
+# Initialize with insert mode cursor (optimized)
 function zle-line-init {
-    echo -ne '\e[5 q'
-    # Redraw prompt
+    [[ "$TERM" != @(linux|vt100|vt220|dumb) ]] && echo -ne '\e[5 q'
     zle reset-prompt
 }
 zle -N zle-line-init
 
-# Prompt with colored path, git info, and vi mode indicator
+# Final prompt configuration
 PROMPT='$(colored_path)${vcs_info_msg_0_} $(vi_mode_indicator) '
 
-# Continuation prompt for multi-line commands (with fallback)
-if [[ -z "$DISPLAY" && -z "$WAYLAND_DISPLAY" && "$TERM" != *"256color"* ]] || \
-   [[ "$TERM" == "linux" || "$TERM" == "vt100" || "$TERM" == "vt220" || "$TERM" == "dumb" ]]; then
-    PROMPT2='%F{yellow}>%f '  # ASCII fallback
+# Continuation prompt (with static unicode detection)
+if [[ -z "$DISPLAY$WAYLAND_DISPLAY" ]] || [[ "$TERM" == @(linux|vt100|vt220|dumb) ]]; then
+    PROMPT2='%F{yellow}>%f '
 else
-    PROMPT2='%F{yellow}❯%f '  # Unicode arrow
+    PROMPT2='%F{yellow}❯%f '
 fi
+
+# Global variables for caching
+typeset -g _prompt_unicode_support
 
 # Prompt customization options:
 # - Set ZSH_PROMPT_COMPACT=true for even more compact paths

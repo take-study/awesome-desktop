@@ -31,18 +31,21 @@ clean_history() {
     echo "History cleaned: duplicates removed"
 }
 
-# Function to search history with fzf (if available)
-if command -v fzf >/dev/null 2>&1; then
-    fzf_history() {
-        local selected_command
-        selected_command=$(fc -rl 1 | awk '{$1=""; print substr($0,2)}' | fzf --height=40% --reverse --query="$LBUFFER")
-        if [[ -n $selected_command ]]; then
-            BUFFER=$selected_command
-            CURSOR=$#BUFFER
-        fi
-        zle redisplay
-    }
-    zle -N fzf_history
-    bindkey '^R' fzf_history
+# Function to search history with fzf (optimized loading)
+if [[ -z "$_fzf_history_loaded" ]]; then
+    if command -v fzf >/dev/null 2>&1; then
+        fzf_history() {
+            local selected_command
+            selected_command=$(fc -rl 1 | awk '{$1=""; print substr($0,2)}' | fzf --height=40% --reverse --query="$LBUFFER")
+            if [[ -n $selected_command ]]; then
+                BUFFER=$selected_command
+                CURSOR=$#BUFFER
+            fi
+            zle redisplay
+        }
+        zle -N fzf_history
+        bindkey '^R' fzf_history
+    fi
+    _fzf_history_loaded=1
 fi
 

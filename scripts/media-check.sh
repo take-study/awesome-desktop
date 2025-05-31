@@ -1,115 +1,91 @@
 #!/bin/bash
 
-# Media detection script for hypridle
+# Media detection script for hypridle (optimized)
 # Checks if any media is currently playing and prevents suspend/lock if so
 
-# Function to check if media is playing via playerctl
+# Cache command availability to avoid repeated checks
+declare -A CMD_CACHE
+
+cmd_exists() {
+    local cmd="$1"
+    [[ -n "${CMD_CACHE[$cmd]}" ]] && return "${CMD_CACHE[$cmd]}"
+    
+    if command -v "$cmd" >/dev/null 2>&1; then
+        CMD_CACHE[$cmd]=0
+        return 0
+    else
+        CMD_CACHE[$cmd]=1
+        return 1
+    fi
+}
+
+# Function to check if media is playing via playerctl (optimized)
 check_playerctl() {
-    if command -v playerctl &> /dev/null; then
-        # Check if any player is playing
-        local status=$(playerctl status 2>/dev/null | grep -i "playing")
-        if [[ -n "$status" ]]; then
-            return 0  # Media is playing
-        fi
-    fi
-    return 1  # No media playing
+    cmd_exists playerctl || return 1
+    
+    # Direct status check without grep
+    local status
+    status=$(playerctl status 2>/dev/null) || return 1
+    [[ "$status" == "Playing" ]] && return 0
+    return 1
 }
 
-# Function to check if media is playing via pactl (PulseAudio)
+# Function to check if media is playing via pactl (optimized)  
 check_pulseaudio() {
-    if command -v pactl &> /dev/null; then
-        # Check if any application is playing audio
-        local playing=$(pactl list sink-inputs | grep -E "State: RUNNING|application.name" | grep -B1 -A1 "State: RUNNING")
-        if [[ -n "$playing" ]]; then
-            return 0  # Audio is playing
-        fi
-    fi
-    return 1  # No audio playing
+    cmd_exists pactl || return 1
+    
+    # More efficient check for running sink inputs
+    pactl list short sink-inputs 2>/dev/null | grep -q . && return 0
+    return 1
 }
 
-# Function to check if video is playing (common video players)
+# Function to check if video is playing (optimized)
 check_video_players() {
-    local video_players=("mpv" "vlc" "totem" "firefox" "chromium" "chrome" "mplayer")
-    
-    for player in "${video_players[@]}"; do
-        if pgrep -x "$player" > /dev/null; then
-            # Additional check for Firefox/Chrome to see if they're actually playing video
-            if [[ "$player" == "firefox" || "$player" == "chromium" || "$player" == "chrome" ]]; then
-                # Check if the browser has any playing media
-                if check_playerctl; then
-                    return 0
-                fi
-            else
-                return 0  # Video player is running
-            fi
-        fi
-    done
-    return 1  # No video players running
-}
-
-# Function to check if any streaming services are active
-check_streaming() {
-    # Check for common streaming applications
-    local streaming_apps=("spotify" "discord" "teams" "zoom" "obs" "obs-studio")
-    
-    for app in "${streaming_apps[@]}"; do
-        if pgrep -x "$app" > /dev/null; then
-            return 0  # Streaming app is running
-        fi
-    done
-    return 1  # No streaming apps running
-}
-
-# Main media detection function
-is_media_playing() {
-    # Check various methods for media detection
-    if check_playerctl || check_pulseaudio || check_video_players || check_streaming; then
-        return 0  # Media is playing
+    # Use single pgrep call with multiple patterns
+    if pgrep -x 'mpv|vlc|totem|mplayer' >/dev/null 2>&1; then
+        return 0
     fi
-    return 1  # No media detected
+    
+    # Check browsers with media only if they're running
+    if pgrep -x 'firefox|chromium|chrome' >/dev/null 2>&1; then
+        check_playerctl && return 0
+    fi
+    
+    return 1
 }
 
-# Check the requested action
+# Function to check if any streaming services are active (optimized)
+check_streaming() {
+    # Single pgrep call for all streaming apps
+    pgrep -x 'spotify|discord|teams|zoom|obs|obs-studio' >/dev/null 2>&1
+}
+
+# Main media detection function (optimized with early exit)
+is_media_playing() {
+    # Check in order of speed: playerctl first (fastest), then process checks
+    check_playerctl && return 0
+    check_video_players && return 0  
+    check_streaming && return 0
+    check_pulseaudio && return 0
+    return 1
+}
+
+# Check the requested action (optimized with reduced output)
 case "$1" in
     "check")
-        if is_media_playing; then
-            echo "Media is playing - preventing sleep/lock"
-            exit 1  # Non-zero exit prevents hypridle action
-        else
-            echo "No media playing - allowing sleep/lock"
-            exit 0  # Zero exit allows hypridle action
-        fi
+        is_media_playing && exit 1 || exit 0
         ;;
     "lock")
-        if is_media_playing; then
-            echo "Media playing - skipping lock"
-            exit 0
-        else
-            loginctl lock-session
-        fi
+        is_media_playing || loginctl lock-session 2>/dev/null
         ;;
     "suspend")
-        if is_media_playing; then
-            echo "Media playing - skipping suspend"
-            exit 0
-        else
-            systemctl suspend
-        fi
+        is_media_playing || systemctl suspend 2>/dev/null
         ;;
     "dpms-off")
-        if is_media_playing; then
-            echo "Media playing - skipping screen off"
-            exit 0
-        else
-            hyprctl dispatch dpms off
-        fi
+        is_media_playing || hyprctl dispatch dpms off 2>/dev/null
         ;;
     *)
-        echo "Usage: $0 {check|lock|suspend|dpms-off}"
-        echo "  check     - Check if media is playing (exit 1 if playing)"
-        echo "  lock      - Lock session only if no media playing"
-        echo "  suspend   - Suspend only if no media playing"
-        echo "  dpms-off  - Turn off display only if no media playing"
+        printf "Usage: %s {check|lock|suspend|dpms-off}\n" "$0" >&2
         exit 1
         ;;
 esac
