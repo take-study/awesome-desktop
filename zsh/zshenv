@@ -10,9 +10,11 @@ export VISUAL="nvim"
 export BROWSER="firefox"
 export TERMINAL="alacritty"
 
+{{#if (eq usegnupg "1")}}
 # GPG configuration
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)" 2>/dev/null
+{{/if}}
 
 # Path additions
 export PATH="$HOME/.local/bin:$PATH"

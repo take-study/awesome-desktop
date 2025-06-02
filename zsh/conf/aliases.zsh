@@ -51,6 +51,9 @@ alias vi='nvim'
 alias vim='nvim'
 alias nano='nvim'
 
+# Make sudo work for alas
+alias sudo='sudo '
+
 # Git aliases (if git is available)
 if command -v git >/dev/null 2>&1; then
     alias g='git'
@@ -178,16 +181,6 @@ if command -v python3 >/dev/null 2>&1; then
     alias serve='python3 -m http.server'
 fi
 
-# Node.js aliases
-if command -v node >/dev/null 2>&1; then
-    alias npmi='npm install'
-    alias npms='npm start'
-    alias npmt='npm test'
-    alias npmr='npm run'
-    alias npmu='npm update'
-    alias npmg='npm install -g'
-fi
-
 # Miscellaneous
 alias h='history'
 alias j='jobs -l'
@@ -196,12 +189,6 @@ alias x='exit'
 alias q='exit'
 alias reload='exec zsh'
 alias cls='clear && ls'
-
-# Fun aliases
-alias please='sudo'
-alias fucking='sudo'
-alias matrix='cmatrix'
-alias starwars='telnet towel.blinkenlights.nl'
 
 # Create a new function for extracting various archive types
 extract() {
@@ -254,6 +241,7 @@ fd() {
     find . -type d -iname "*$1*"
 }
 
+{{#if (eq usegnupg "1")}}
 # GPG and SSH Agent aliases
 alias gpg-restart='restart_gpg_agent'
 alias gpg-reload='reload_gpg_agent'
@@ -261,6 +249,7 @@ alias gpg-status='gpg-connect-agent "keyinfo --list" /bye'
 alias ssh-add-gpg='ssh-add -l'
 alias gpg-test='echo "test" | gpg --clearsign'
 alias gpg-clean='clean_gpg_cache'
+{{/if}}
 
 # Zsh cache management
 alias zsh-clean-history='rm -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history" && echo "Zsh history cache cleaned"'
