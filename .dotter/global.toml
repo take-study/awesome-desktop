@@ -72,6 +72,9 @@ error_prompt = "Error:"         # Calculator error
 [tofi.files]
 "tofi/config" = "~/.config/tofi/config"
 
+[bottom.files]
+"bottom/bottom.toml" = "~/.config/bottom/bottom.toml"
+
 [gtk.variables]
 gtk_theme = "AweSome"
 [gtk.files]
