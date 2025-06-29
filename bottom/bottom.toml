@@ -98,7 +98,7 @@ network_legend = "top-right"
 # Processes widget configuration
 [processes]
 # The columns shown by the process widget
-columns = ["PID", "Name", "CPU%", "Mem%", "R/s", "W/s", "T.Read", "T.Write", "User", "State"]
+columns = ["PID", "User", "Name", "CPU%", "Mem%", "State"]
 
 # CPU widget configuration
 [cpu]
@@ -108,7 +108,7 @@ default = "all"
 # Disk widget configuration
 [disk]
 # The columns shown by the disk widget
-columns = ["Disk", "Mount", "Used", "Free", "Total", "Used%", "R/s", "W/s"]
+columns = ["Disk", "Mount"]
 
 # Custom styling - matching OneDarkPro theme
 [styles]
@@ -118,7 +118,16 @@ theme = "default"
 [styles.cpu]
 all_entry_color = "{{accent_blue}}"
 avg_entry_color = "{{accent_green}}"
-cpu_core_colors = ["{{accent_purple}}", "{{accent_yellow}}", "{{accent_cyan}}", "{{accent_green}}", "{{accent_blue}}", "{{accent_orange}}", "{{accent_red}}", "{{accent_pink}}"]
+cpu_core_colors = [
+    "{{accent_purple}}",
+    "{{accent_yellow}}",
+    "{{accent_cyan}}",
+    "{{accent_green}}",
+    "{{accent_blue}}",
+    "{{accent_orange}}",
+    "{{accent_red}}",
+    "{{accent_pink}}",
+]
 
 [styles.memory]
 ram_color = "{{accent_purple}}"
@@ -138,42 +147,40 @@ medium_battery_color = "{{warning}}"
 low_battery_color = "{{error}}"
 
 [styles.tables]
-headers = {color = "{{accent_blue}}", bold = true}
+headers = { color = "{{accent_blue}}", bold = true }
 
 [styles.graphs]
 graph_color = "{{fg_secondary}}"
-legend_text = {color = "{{fg_secondary}}"}
+legend_text = { color = "{{fg_secondary}}" }
 
 [styles.widgets]
 border_color = "{{fg_tertiary}}"
 selected_border_color = "{{border_active}}"
-widget_title = {color = "{{fg_primary}}"}
-text = {color = "{{fg_primary}}"}
-selected_text = {color = "{{bg_primary}}", bg_color = "{{accent_blue}}"}
-disabled_text = {color = "{{fg_disabled}}"}
+widget_title = { color = "{{fg_primary}}" }
+text = { color = "{{fg_primary}}" }
+selected_text = { color = "{{bg_primary}}", bg_color = "{{accent_blue}}" }
+disabled_text = { color = "{{fg_disabled}}" }
 
 # Custom layout - organized for better space utilization
 [[row]]
-  ratio = 30
-  [[row.child]]
-    type = "cpu"
+ratio = 30
+[[row.child]]
+ratio = 2
+type = "cpu"
+[[row.child]]
+[[row.child.child]]
+type = "net"
+[[row.child.child]]
+type = "mem"
 
 [[row]]
-  ratio = 40
-  [[row.child]]
-    ratio = 3
-    type = "mem"
-  [[row.child]]
-    ratio = 2
-    [[row.child.child]]
-      type = "temp"
-    [[row.child.child]]
-      type = "disk"
-
-[[row]]
-  ratio = 30
-  [[row.child]]
-    type = "net"
-  [[row.child]]
-    type = "proc"
-    default = true
+ratio = 40
+[[row.child]]
+ratio = 2
+type = "proc"
+default = true
+[[row.child]]
+[[row.child.child]]
+type = "temp"
+[[row.child.child]]
+type = "disk"
