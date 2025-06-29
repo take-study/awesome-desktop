@@ -1,0 +1,77 @@
+# LF Colors configuration using OneDarkPro theme
+# Format: filetype:color_code
+
+# Default colors
+di={{accent_blue}}      # directories
+fi={{fg_primary}}       # regular files  
+ln={{accent_cyan}}      # symbolic links
+or={{accent_red}}       # orphaned links
+ex={{accent_green}}     # executables
+su={{accent_red}}       # setuid files
+sg={{accent_yellow}}    # setgid files
+tw={{accent_purple}}    # sticky other writable
+ow={{accent_orange}}    # other writable
+st={{accent_purple}}    # sticky
+
+# File extensions with colors
+*.txt={{fg_secondary}}
+*.md={{fg_secondary}}
+*.json={{accent_yellow}}
+*.yaml={{accent_yellow}}
+*.yml={{accent_yellow}}
+*.toml={{accent_yellow}}
+*.conf={{accent_yellow}}
+*.config={{accent_yellow}}
+*.ini={{accent_yellow}}
+
+# Programming files
+*.c={{accent_blue}}
+*.h={{accent_blue}}
+*.cpp={{accent_blue}}
+*.hpp={{accent_blue}}
+*.py={{accent_green}}
+*.js={{accent_yellow}}
+*.ts={{accent_blue}}
+*.html={{accent_orange}}
+*.css={{accent_pink}}
+*.scss={{accent_pink}}
+*.rs={{accent_orange}}
+*.go={{accent_cyan}}
+*.java={{accent_red}}
+*.sh={{accent_green}}
+*.zsh={{accent_green}}
+*.bash={{accent_green}}
+*.fish={{accent_green}}
+
+# Archives
+*.zip={{accent_purple}}
+*.tar={{accent_purple}}
+*.gz={{accent_purple}}
+*.bz2={{accent_purple}}
+*.xz={{accent_purple}}
+*.7z={{accent_purple}}
+*.rar={{accent_purple}}
+
+# Media files
+*.jpg={{accent_pink}}
+*.jpeg={{accent_pink}}
+*.png={{accent_pink}}
+*.gif={{accent_pink}}
+*.bmp={{accent_pink}}
+*.svg={{accent_pink}}
+*.mp3={{accent_cyan}}
+*.mp4={{accent_cyan}}
+*.avi={{accent_cyan}}
+*.mkv={{accent_cyan}}
+*.mov={{accent_cyan}}
+*.flac={{accent_cyan}}
+*.wav={{accent_cyan}}
+
+# Documents
+*.pdf={{accent_red}}
+*.doc={{accent_blue}}
+*.docx={{accent_blue}}
+*.xls={{accent_green}}
+*.xlsx={{accent_green}}
+*.ppt={{accent_orange}}
+*.pptx={{accent_orange}}

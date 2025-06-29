@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Cleaner script for lf
+# Called when lf exits preview mode
+
+# Clear the terminal
+printf '\e[2J\e[H\e[m'

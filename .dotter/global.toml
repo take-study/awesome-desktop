@@ -83,5 +83,25 @@ gtk_theme = "AweSome"
 "gtk/settings4.ini" = "~/.config/gtk-4.0/settings.ini"
 "gtk/themes" = "~/.themes"
 
+[xdg-desktop-portal-wlr.variables]
+terminal_cmd = "alacritty --class file-manager"
+lf_wrapper_path = "~/.local/bin/lf-wrapper.sh"
+default_home_dir = "$HOME"
+
+[xdg-desktop-portal-wlr.files]
+"xdg-desktop-portal-wlr/config" = "~/.config/xdg-desktop-portal-wlr/config"
+"scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper.sh"
+
+[xdg-desktop-portal.files]
+"xdg-desktop-portal/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
+
+[lf.files]
+"lf/lfrc" = {target = "~/.config/lf/lfrc", type = "symbolic"}
+"lf/scope" = "~/.config/lf/scope"
+"lf/cleaner" = "~/.config/lf/cleaner"
+"lf/icons" = "~/.config/lf/icons"
+"lf/colors" = "~/.config/lf/colors"
+"lf/xdg-filepicker" ={target = "~/.config/lf/xdg-filepicker", type = "symbolic"}
+
 [settings]
 default_target_type = "automatic"

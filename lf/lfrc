@@ -1,0 +1,161 @@
+# lf file manager configuration
+
+# Basic settings
+set hidden true
+set drawbox true
+set info size
+set dircounts true
+set ratios 1:2:3
+set scrolloff 10
+set period 1
+set hiddenfiles ".*:*.aux:*.log:*.toc"
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/scope'
+
+# Use the `dim` attribute instead of underline for the cursor in the preview pane
+set cursorpreviewfmt "\033[7;2m"
+
+# Font and colors configuration
+# Using OneDarkPro theme colors
+set color256 true
+
+# Icon configuration
+set icons true
+
+# Key bindings
+map <enter> shell
+map x $$f
+map X !$f
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+# Define a custom 'open' command
+cmd open &{{
+    case $(file --mime-type -Lb $f) in
+        text/*) lf -remote "send $id \$$EDITOR \$fx";;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+# Make sure trash folder exists
+%mkdir -p ~/.local/share/Trash/files
+
+# Move current file or selected files to trash folder
+cmd trash %set -f; mv $fx ~/.cache/trash
+
+# Define a custom 'delete' command
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+
+# Extract the current file with the right command
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# Compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# Compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# XDG File Picker Portal integration
+cmd inportal source "~/.config/lf/xdg-filepicker/inportal"
+
+# Key mappings
+map <delete> trash
+map D delete
+map E extract
+map C push :zip<space>
+map T push :tar<space>
+
+# Navigation
+map gd cd ~/Documents
+map gD cd ~/Downloads
+map gp cd ~/Pictures
+map gc cd ~/.config
+map gl cd ~/.local
+map gm cd /mnt
+map gr cd /
+map gt cd ~/.cache/trash
+
+# Search
+map f find
+map F filter
+
+# Selection
+map <space> :toggle; down
+map v :invert
+map u :unselect; clear
+
+# Show/hide hidden files
+map zh set hidden!
+
+# Reload
+map <c-r> reload
+
+# Edit config
+map C $$EDITOR ~/.config/lf/lfrc
+
+# File operations
+map <c-c> copy
+map <c-x> cut
+map <c-v> paste
+map <c-z> $ kill -STOP $PPID
+
+# Directory creation
+map a push :mkdir<space>
+map A push :mkfile<space>
+
+# File/folder creation commands
+cmd mkdir %mkdir -p "$@"
+cmd mkfile %touch "$@"
+
+# Bulk rename
+cmd bulk-rename ${{
+    index=$(mktemp /tmp/lf-bulk-rename.XXXXXXXXXX)
+    if [ -n "${fs}" ]; then
+        echo "$fs" > $index
+    else
+        echo "$(basename $f)" > $index
+    fi
+    $EDITOR $index
+    if [ $(cat $index | wc -l) -eq $(echo "$fs" | wc -l) ]; then
+        max=$(cat $index | wc -l)
+        counter=1
+        while [ $counter -le $max ]; do
+            a="$(echo "$fs" | sed "${counter}q;d")"
+            b="$(cat $index | sed "${counter}q;d")"
+            [ "$a" = "$b" ] || mv "$a" "$b"
+            counter=$(($counter + 1))
+        done
+    else
+        $EDITOR $index
+    fi
+    rm $index
+}}
+map r bulk-rename

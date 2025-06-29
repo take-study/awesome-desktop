@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# File preview script for lf
+# Called with args: $1 (file) $2 (width) $3 (height) $4 (x) $5 (y)
+
+file="$1"
+width="$2"
+height="$3"
+
+# Fallback to basic file info if no specific handler
+fallback() {
+    echo "File: $(basename "$file")"
+    echo "Size: $(du -h "$file" | cut -f1)"
+    echo "Type: $(file -b "$file")"
+    echo "Modified: $(stat -c %y "$file" | cut -d. -f1)"
+}
+
+case "$(file --dereference --brief --mime-type "$file")" in
+    text/* | application/json | application/javascript | application/x-sh)
+        # Syntax highlighting with bat if available, otherwise cat
+        if command -v bat > /dev/null 2>&1; then
+            bat --color=always --style=plain --pager=never "$file"
+        elif command -v highlight > /dev/null 2>&1; then
+            highlight -O ansi "$file" 2>/dev/null
+        else
+            cat "$file"
+        fi
+        ;;
+    image/*)
+        # Image preview
+        if command -v imv > /dev/null 2>&1; then
+            #chafa --fill=block --symbols=block -c 256 -s "${width}x${height}" "$file"
+            imv "$file"
+        elif command -v img2txt > /dev/null 2>&1; then
+            img2txt --gamma=0.6 --width="$width" "$file"
+        else
+            fallback
+        fi
+        ;;
+    video/*)
+        # Video info
+        if command -v ffprobe > /dev/null 2>&1; then
+            ffprobe -v quiet -print_format json -show_format -show_streams "$file"
+        else
+            fallback
+        fi
+        ;;
+    application/pdf)
+        # PDF preview
+        if command -v pdftotext > /dev/null 2>&1; then
+            pdftotext -l 10 -nopgbrk -q "$file" - | head -"$height"
+        else
+            fallback
+        fi
+        ;;
+    application/zip | application/x-rar*)
+        # Archive contents
+        if command -v unzip > /dev/null 2>&1 && [[ "$file" == *.zip ]]; then
+            unzip -l "$file"
+        elif command -v unrar > /dev/null 2>&1 && [[ "$file" == *.rar ]]; then
+            unrar l "$file"
+        else
+            fallback
+        fi
+        ;;
+    *)
+        fallback
+        ;;
+esac
