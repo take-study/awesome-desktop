@@ -1,6 +1,10 @@
+# ============================================================================
 # lf file manager configuration
+# ============================================================================
 
-# Basic settings
+# ============================================================================
+# Basic Settings
+# ============================================================================
 set hidden true
 set drawbox true
 set info size
@@ -8,10 +12,17 @@ set dircounts true
 set ratios 1:2:3
 set scrolloff 10
 set period 1
-set hiddenfiles ".*:*.aux:*.log:*.toc"
+#set hiddenfiles ".*:*.aux:*.log:*.toc"
+
+# ============================================================================
+# External Scripts Configuration
+# ============================================================================
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
 
+# ============================================================================
+# Display Settings
+# ============================================================================
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
@@ -22,14 +33,17 @@ set color256 true
 # Icon configuration
 set icons true
 
-# Key bindings
-map <enter> shell
-map x $$f
-map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
+# ============================================================================
+# Initialization
+# ============================================================================
+# Make sure trash folder exists
+%mkdir -p ~/.local/share/trash/files
 
-# Define a custom 'open' command
+# ============================================================================
+# Custom Commands
+# ============================================================================
+
+# Open files with appropriate applications
 cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
@@ -37,17 +51,20 @@ cmd open &{{
     esac
 }}
 
-# Make sure trash folder exists
-%mkdir -p ~/.local/share/Trash/files
-
 # Move current file or selected files to trash folder
-cmd trash %set -f; mv $fx ~/.cache/trash
+cmd trash ${{
+    set -f
+    printf "Selected files:\n$fx\n"
+    printf "move to trash?[y/n] "
+    read ans
+    [ "$ans" = "y" ] && mv $fx ~/.cache/trash
+}}
 
-# Define a custom 'delete' command
+# Define a custom 'delete' command that works with selected files
 cmd delete ${{
     set -f
-    printf "$fx\n"
-    printf "delete?[y/n]"
+    printf "Selected files:\n$fx\n"
+    printf "delete permanently?[y/n] "
     read ans
     [ "$ans" = "y" ] && rm -rf $fx
 }}
@@ -83,54 +100,6 @@ cmd zip ${{
     rm -rf $1
 }}
 
-# XDG File Picker Portal integration
-cmd inportal source "~/.config/lf/xdg-filepicker/inportal"
-
-# Key mappings
-map <delete> trash
-map D delete
-map E extract
-map C push :zip<space>
-map T push :tar<space>
-
-# Navigation
-map gd cd ~/Documents
-map gD cd ~/Downloads
-map gp cd ~/Pictures
-map gc cd ~/.config
-map gl cd ~/.local
-map gm cd /mnt
-map gr cd /
-map gt cd ~/.cache/trash
-
-# Search
-map f find
-map F filter
-
-# Selection
-map <space> :toggle; down
-map v :invert
-map u :unselect; clear
-
-# Show/hide hidden files
-map zh set hidden!
-
-# Reload
-map <c-r> reload
-
-# Edit config
-map C $$EDITOR ~/.config/lf/lfrc
-
-# File operations
-map <c-c> copy
-map <c-x> cut
-map <c-v> paste
-map <c-z> $ kill -STOP $PPID
-
-# Directory creation
-map a push :mkdir<space>
-map A push :mkfile<space>
-
 # File/folder creation commands
 cmd mkdir %mkdir -p "$@"
 cmd mkfile %touch "$@"
@@ -158,4 +127,85 @@ cmd bulk-rename ${{
     fi
     rm $index
 }}
+
+# XDG File Picker Portal integration
+cmd inportal source "~/.config/lf/xdg-filepicker/inportal"
+
+# ============================================================================
+# Hooks
+# ============================================================================
+# Save last directory on exit and restore on start
+cmd on-init &{{ 
+    # Create the directory if it doesn't exist
+    mkdir -p ~/.cache/lf
+    # Restore last directory if exists
+    if [ -f ~/.cache/lf/lastdir ]; then
+        lastdir=$(cat ~/.cache/lf/lastdir)
+        if [ -d "$lastdir" ]; then
+            lf -remote "send $id cd '$lastdir'"
+        fi
+    fi
+}}
+
+# Save current directory and quit
+cmd on-quit &{{
+    printf '%s' "$PWD" > ~/.cache/lf/lastdir
+}}
+
+# ============================================================================
+# Key Mappings
+# ============================================================================
+
+# Basic operations
+map <enter> shell
+map x $$f
+map X !$f
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+# File operations
+map <c-c> copy
+map <c-x> cut
+map <c-v> paste
+map <c-z> $ kill -STOP $PPID
+
+# File/directory actions
+map <delete> trash
+map <del> trash
+map d trash
+map D delete
+map E extract
+map C push :zip<space>
+map T push :tar<space>
+map a push :mkdir<space>
+map A push :mkfile<space>
 map r bulk-rename
+
+# Navigation shortcuts
+map gd cd ~/Documents
+map gD cd ~/Downloads
+map gp cd ~/Pictures
+map gc cd ~/.config
+map gl cd ~/.local
+map gm cd /mnt
+map gr cd /
+map gt cd ~/.cache/trash
+
+# Search and filter
+map f find
+map F filter
+
+# Selection
+map <space> :toggle; down
+map v :toggle
+map V :invert
+map u :unselect; clear
+
+# View options
+map zh set hidden!
+
+# System
+map <c-r> reload
+
+# Configuration
+map C $$EDITOR ~/.config/lf/lfrc

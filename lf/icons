@@ -1,126 +1,169 @@
 # Icons for lf file manager
 # These icons will be displayed next to file and directory names
-# Using Nerd Font icons for better visual experience
+# Using Maple Font compatible Nerd Font icons for better visual experience
 
-# Default icons using Nerd Font
-di 📁
-fi 📄
-tw 📂
-ow 📁
-ln 🔗
-or ❌ 
+# Default icons using Maple Font (Nerd Font compatible)
+di 
+fi 
+tw 🗂
+ow 📂
+ln 
+or ❌
+ex ⚡
 
 # File extensions (case insensitive)
 # Archives
-*.7z 📦
-*.tar 📦
-*.gz 📦
-*.gzip 📦
-*.bz2 📦
-*.xz 📦
-*.zip 📦
-*.rar 📦
-*.deb 📦
-*.rpm 📦
-*.pkg 📦
-*.dmg 📦 
+*.7z 
+*.tar 
+*.gz 
+*.gzip 
+*.bz2 
+*.xz 
+*.zip 
+*.rar 
+*.deb 
+*.rpm 
+*.pkg 
+*.dmg 
+*.pkg.tar.zst 
 
 # Programming
-*.c 🔧
-*.h 🔧
-*.cpp 🔧
-*.cc 🔧
-*.cxx 🔧
-*.hpp 🔧
-*.hh 🔧
-*.hxx 🔧
-*.py 🐍
-*.rb 💎
-*.js ⚡
-*.ts ⚡
-*.jsx ⚛️
-*.tsx ⚛️
-*.go 🐹
-*.rs 🦀
-*.java ☕
-*.class ☕
-*.php 🐘
+*.c 󰙱
+*.h 󰙱
+*.cpp 󰙲
+*.cc 󰙲
+*.cxx 󰙲
+*.hpp 󰙲
+*.hh 󰙲
+*.hxx 󰙲
+*.py 󰌠
+*.rb 󰫏
+*.js 󰌞
+*.ts 󰛦
+*.jsx 󰌞
+*.tsx 󰛦
+*.go 󰟓
+*.rs 󱘗
+*.java 󰬷
+*.class 󰬷
+*.php 󰌟
 *.pl 🐪
-*.lua 🌙
-*.sh 🐚
-*.bash 🐚
-*.zsh 🐚
-*.fish 🐠
-*.vim 📝
-*.vimrc 📝 
+*.lua 󰢱
+*.sh 󱆃
+*.bash 󱆃
+*.zsh 󱆃
+*.fish 󱆃
+*.vim 
+*.vimrc 
+
+# Web Development
+*.html 
+*.htm 
+*.css 
+*.scss 
+*.sass 
+*.less 
+*.stylus 
+*.vue 
+*.svelte 🧡
+*.angular 
+*.react 
+
+# Modern Languages
+*.kt 
+*.swift 
+*.dart 
+*.scala 
+*.clj 🟢
+*.cljs 🟢
+*.hs 🟡
+*.elm 🌳
+*.ml 🐫
+*.fs 🔷
+*.fsx 🔷
+*.fsi 🔷
 
 # Documents
-*.txt 📄
-*.md 📝
-*.markdown 📝
-*.pdf 📕
-*.doc 📘
-*.docx 📘
-*.rtf 📄
-*.tex 📄
-*.org 📄
-*.epub 📚 
+*.txt 
+*.md 󰽛
+*.markdown 󰽛
+*.pdf 
+*.doc 
+*.docx 
+*.xlsx 󰈛
+*.xls 󰈛
+*.rtf 
+*.tex 📚
+*.org 📋
+*.epub 
+*.mobi 
+*.azw 
+*.azw3 
 
 # Configuration
-*.conf ⚙️
-*.config ⚙️
-*.ini ⚙️
-*.toml ⚙️
-*.yaml ⚙️
-*.yml ⚙️
-*.json 📋
-*.xml 📋
-*.rc ⚙️ 
+*.conf 
+*.config 
+*.ini 
+*.toml ⚙
+*.yaml 
+*.yml 
+*.json 
+*.json5 
+*.jsonc 
+*.xml 󰗀
+*.rc 
+*.env 
+*.editorconfig ⚙
+*.toml 
 
 # Media
-*.jpg 🖼️
-*.jpeg 🖼️
-*.png 🖼️
-*.gif 🖼️
-*.bmp 🖼️
-*.svg 🖼️
-*.ico 🖼️
-*.webp 🖼️
-*.mp3 🎵
-*.mp4 🎬
-*.avi 🎬
-*.mkv 🎬
-*.mov 🎬
-*.webm 🎬
-*.flac 🎵
-*.wav 🎵
-*.ogg 🎵 
+*.jpg 🖼
+*.jpeg 🖼
+*.png 🖼
+*.gif 🎞
+*.bmp 🖼
+*.svg 󰜡
+*.ico 🖼
+*.webp 🖼
+*.tiff 🖼
+*.tif 🖼
+*.psd 
+*.ai 🎨
+*.eps 🎨
+*.mp3 
+*.mp4 
+*.avi 
+*.mkv 
+*.mov 
+*.webm 
+*.flac 
+*.wav 
+*.ogg 
+*.m4a 
+*.aac 
+*.opus 
 
-# Web
-*.html 🌐
-*.htm 🌐
-*.css 🎨
-*.scss 🎨
-*.less 🎨
-*.js ⚡
-*.ts ⚡
-*.php 🐘
-*.asp 🌐 
+# Data & Database
+*db 
+*.db 
+*.sqlite 
+*.sqlite3 
+*.csv 📊
+*.tsv 📊
+*.log 📋
+*.tmp 🗑
+*.cache 🗑
+*.sql 
+*.psql 
+*.mysql 
 
 # Executable
-*.exe ⚙️
+*.exe ⚡
 *.app 📱
-*.deb 📦
-*.rpm 📦
-*.msi ⚙️
-*.dmg 📦 
-
-# Data
-*.db 🗃️
-*.sqlite 🗃️
-*.csv 📊
-*.log 📋
-*.tmp 🗂️ 
+*.msi 📦
+*.appimage 📦
+*.snap 
+*.flatpak 
 
 # Other
 *.iso 💿
@@ -129,4 +172,27 @@ or ❌
 *.dll 🔗
 *.o 🔧
 *.a 🔧
-*.lib 🔧 
+*.lib 🔧
+*.bin ⚡
+*.hex 🔢
+*.elf ⚡
+
+# Version Control
+*.git 
+*.gitignore 
+*.gitmodules 
+*.gitattributes 
+
+# Package Files
+*.npm 📦
+*.yarn 
+*.gem 📦
+*.pip 📦
+*.cargo 📦
+*.lock 
+
+# Docker & Containers
+*Dockerfile 
+*docker-compose.yml 
+*docker-compose.yaml 
+*.dockerignore 

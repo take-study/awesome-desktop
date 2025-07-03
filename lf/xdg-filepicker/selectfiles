@@ -1,4 +1,4 @@
-set promptfmt "\033[33;1m📁 Open files \033[35;1m%d\033[0m\033[1m%f\033[0m"
+set promptfmt "\033[33;1m Open files \033[35;1m%d\033[0m\033[1m%f\033[0m"
 set rulerfmt "%a  |%p  |\033[7;31m %m \033[0m  |\033[7;33m %c \033[0m  |\033[7;35m Selected: \033[1m%s \033[0m  |\033[7;34m %f \033[0m  |%i/%t"
 
 cmd selectfiles %{{
