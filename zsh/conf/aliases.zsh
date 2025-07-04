@@ -91,14 +91,6 @@ alias desktop='cd ~/Desktop'
 alias projects='cd ~/Projects'
 alias workspace='cd ~/Workspace'
 
-# Python aliases
-if command -v python3 >/dev/null 2>&1; then
-    alias py='python3'
-    alias pip='pip3'
-    alias venv='python3 -m venv'
-    alias serve='python3 -m http.server'
-fi
-
 # Miscellaneous
 alias h='history'
 alias j='jobs -l'
@@ -158,6 +150,76 @@ ff() {
 fd() {
     find . -type d -iname "*$1*"
 }
+
+# Z-like directory jumping functionality
+# Initialize directory history file
+Z_DATA="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/z_dirs"
+[[ ! -d "$(dirname "$Z_DATA")" ]] && mkdir -p "$(dirname "$Z_DATA")"
+[[ ! -f "$Z_DATA" ]] && touch "$Z_DATA"
+
+# Function to add current directory to z database
+_z_add() {
+    local dir="$PWD"
+    [[ "$dir" == "$HOME" ]] && return
+    
+    # Remove existing entry and add to top with timestamp
+    local temp_file="${Z_DATA}.tmp"
+    grep -v "^$dir|" "$Z_DATA" > "$temp_file" 2>/dev/null || true
+    echo "$dir|$(date +%s)|1" >> "$temp_file"
+    
+    # Keep only last 100 entries
+    tail -100 "$temp_file" > "$Z_DATA"
+    rm "$temp_file"
+}
+
+# Main z function for directory jumping
+z() {
+    if [[ $# -eq 0 ]]; then
+        # Show recent directories
+        echo "Recent directories:"
+        awk -F'|' '{print NR ": " $1}' "$Z_DATA" | tail -10
+        return
+    fi
+    
+    local pattern="$1"
+    local matches
+    
+    # Find matching directories (case insensitive)
+    matches=$(grep -i "$pattern" "$Z_DATA" | awk -F'|' '{print $1}' | tac)
+    
+    if [[ -z "$matches" ]]; then
+        echo "No matches found for: $pattern"
+        return 1
+    fi
+    
+    # Get first match that exists
+    local target
+    while IFS= read -r dir; do
+        if [[ -d "$dir" ]]; then
+            target="$dir"
+            break
+        fi
+    done <<< "$matches"
+    
+    if [[ -n "$target" ]]; then
+        cd "$target"
+        echo "Jumped to: $target"
+    else
+        echo "No valid directories found for: $pattern"
+        return 1
+    fi
+}
+
+# Hook to add directories automatically
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _z_add
+
+# Z aliases and related functions
+alias zz='z'                                    # Short alias for z
+alias zi='z'                                    # Alternative alias
+alias zh='cat "$Z_DATA" | awk -F"|" "{print \$1}" | tail -20'  # Show z history
+alias zc='> "$Z_DATA" && echo "Z history cleared"'  # Clear z history
+alias ze='$EDITOR "$Z_DATA"'                    # Edit z database
 
 {{#if (eq usegnupg "1")}}
 # GPG and SSH Agent aliases

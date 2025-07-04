@@ -4,7 +4,6 @@
 depends = []
 
 [default.variables]
-wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 font = "Maple Mono NF CN"
 ui_font = "Maple Mono NF CN"
 font_size = "11"
@@ -21,27 +20,42 @@ font_size_xlarge = "55"
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
 
+[zsh]
+depends = ["nvim"]
+
 [zsh.variables]
 usegnupg = "1"
 
 [zsh.files]
+"zsh/zlogin" = "~/.zlogin"
 "zsh/zshrc" = "~/.zshrc"
 "zsh/zshenv" = "~/.zshenv"
 "zsh/conf" = "~/.config/zsh/conf"
-"zsh/plugins" = {target = "~/.config/zsh/plugins", type = "symbolic"}
+"zsh/plugins" = { target = "~/.config/zsh/plugins", type = "symbolic" }
 "zsh/local.zsh.example" = "~/.config/zsh/local.zsh.example"
 
 [hyprland]
-depends = ["alacritty", "dunst", "tofi", "tmux", "fcitx5"]
+depends = [
+    "alacritty",
+    "dunst",
+    "tofi",
+    "fcitx5",
+    "lf",
+    "xdg-desktop-portal-wlr",
+    "xdg-desktop-portal",
+    "gtk",
+    "bottom",
+]
 
 [hyprland.variables]
 # Unicode prompt icons for different purposes:
 # 🚀 App launcher | 📋 Clipboard | 🧮 Calculator | 📊 Result | ⚠️ Error | ❯ General
-prompt_text = "Run:"           # App launcher (tofi-drun)
-clipboard_prompt = "Clipboard:"      # Clipboard manager  
-calc_prompt = "Calculator:"          # Calculator input
-result_prompt = "Result:"        # Calculator result
-error_prompt = "Error:"         # Calculator error
+prompt_text = "󰣆 :"                         # App launcher (tofi-drun)
+clipboard_prompt = " :"              # Clipboard manager  
+calc_prompt = " :"                  # Calculator input
+result_prompt = " :"                    # Calculator result
+error_prompt = " :"                      # Calculator error
+wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
@@ -96,12 +110,12 @@ default_home_dir = "$HOME"
 "xdg-desktop-portal/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
 
 [lf.files]
-"lf/lfrc" = {target = "~/.config/lf/lfrc", type = "symbolic"}
+"lf/lfrc" = { target = "~/.config/lf/lfrc", type = "symbolic" }
 "lf/scope" = "~/.config/lf/scope"
 "lf/cleaner" = "~/.config/lf/cleaner"
 "lf/icons" = "~/.config/lf/icons"
 "lf/colors" = "~/.config/lf/colors"
-"lf/xdg-filepicker" ={target = "~/.config/lf/xdg-filepicker", type = "symbolic"}
+"lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
 
 [settings]
 default_target_type = "automatic"

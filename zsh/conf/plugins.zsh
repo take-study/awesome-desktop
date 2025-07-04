@@ -39,7 +39,7 @@ if [[ -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]]; then
     
     # Optimized autosuggestion settings for performance
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"
-    ZSH_AUTOSUGGEST_STRATEGY=(history)  # Use only history for speed
+    ZSH_AUTOSUGGEST_STRATEGY=(history completion)  # Use history first, then completion for suggestions
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
     ZSH_AUTOSUGGEST_USE_ASYNC=1
     ZSH_AUTOSUGGEST_MANUAL_REBIND=1     # Manual rebind for better performance

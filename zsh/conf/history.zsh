@@ -4,11 +4,11 @@
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p "$ZSH_CACHE_DIR"
 HISTFILE="${ZSH_CACHE_DIR}/zsh_history"
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=3000
+SAVEHIST=3000
 
 # History options
-setopt EXTENDED_HISTORY          # Save timestamp and duration
+#setopt EXTENDED_HISTORY          # Save timestamp and duration
 setopt SHARE_HISTORY            # Share history between sessions
 setopt APPEND_HISTORY           # Append to history file
 setopt INC_APPEND_HISTORY       # Write to history file immediately

@@ -54,7 +54,7 @@ check_dependencies
 
 # Get user input through tofi (optimized)
 input=$(echo "" | tofi \
-    --prompt-text {{calc_prompt}} \
+    --prompt-text "{{calc_prompt}}" \
     --width 600 \
     --height 250 \
     --num-results 1 \
