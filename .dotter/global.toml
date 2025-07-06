@@ -45,16 +45,17 @@ depends = [
     "xdg-desktop-portal",
     "gtk",
     "bottom",
+    "tmux",
 ]
 
 [hyprland.variables]
 # Unicode prompt icons for different purposes:
 # 🚀 App launcher | 📋 Clipboard | 🧮 Calculator | 📊 Result | ⚠️ Error | ❯ General
-prompt_text = "󰣆 :"                         # App launcher (tofi-drun)
-clipboard_prompt = " :"              # Clipboard manager  
-calc_prompt = " :"                  # Calculator input
-result_prompt = " :"                    # Calculator result
-error_prompt = " :"                      # Calculator error
+prompt_text = "󰣆 :"                          # App launcher (tofi-drun)
+clipboard_prompt = " :"                     # Clipboard manager  
+calc_prompt = " :"                          # Calculator input
+result_prompt = " :"                        # Calculator result
+error_prompt = " :"                         # Calculator error
 wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 
 [hyprland.files]
@@ -76,7 +77,7 @@ wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 "dunst/dunstrc" = "~/.config/dunst/dunstrc"
 
 [tmux.files]
-"tmux/tmux.conf" = "~/.tmux.conf"
+"tmux/tmux.conf" = "~/.config/tmux/tmux.conf"
 
 [fcitx5.files]
 "fcitx5/config" = "~/.config/fcitx5/config"
