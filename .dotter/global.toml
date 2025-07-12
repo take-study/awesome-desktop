@@ -118,5 +118,18 @@ default_home_dir = "$HOME"
 "lf/colors" = "~/.config/lf/colors"
 "lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
 
+[qutebrowser.variables]
+translate_target = "zh-CN"  # Default translation target language
+
+[qutebrowser.files]
+"qutebrowser/config.py" = "~/.config/qutebrowser/config.py"
+"qutebrowser/autoconfig.yml" = "~/.config/qutebrowser/autoconfig.yml"
+"qutebrowser/stylesheet.css" = "~/.config/qutebrowser/stylesheet.css"
+"qutebrowser/quickmarks" = "~/.config/qutebrowser/quickmarks"
+"qutebrowser/bookmarks" = "~/.config/qutebrowser/bookmarks/"
+"qutebrowser/theme.py" = "~/.config/qutebrowser/theme.py"
+"qutebrowser/userscripts" = "~/.config/qutebrowser/userscripts"
+"qutebrowser/userscripts/translate" = {target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic"}
+
 [settings]
 default_target_type = "automatic"

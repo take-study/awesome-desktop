@@ -158,14 +158,15 @@ cmd on-quit &{{
 
 # Basic operations
 map <enter> shell
-map x $$f
-map X !$f
+#map x $$f
+#map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
 # File operations
 map <c-c> copy
 map <c-x> cut
+map X cut
 map <c-v> paste
 map <c-z> $ kill -STOP $PPID
 

@@ -1,0 +1,242 @@
+/* Qutebrowser Custom Stylesheet
+ * OneDarkPro theme compatibility
+ * Uses global color variables from dotter configuration
+ */
+
+/* =============================================================================
+ * Image and Media Preservation
+ * ============================================================================= */
+
+/* Preserve QR codes and important graphics - prevent darkmode filters */
+img[src*="qr"], img[alt*="qr" i], img[alt*="code" i], 
+img[class*="qr" i], img[id*="qr" i],
+canvas[class*="qr" i], canvas[id*="qr" i],
+.qr-code, .qrcode, .QRCode, .barcode,
+img[src*="captcha" i], img[alt*="captcha" i] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    background-color: white !important;
+    padding: 4px !important;
+    border-radius: 4px !important;
+}
+
+/* Preserve other important images that shouldn't be inverted */
+img[src*="logo"], img[alt*="logo" i],
+img[src*="icon"], img[alt*="icon" i],
+img[class*="logo" i], img[class*="icon" i] {
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* =============================================================================
+ * Website Dark Mode Overrides
+ * ============================================================================= */
+
+/* Force dark background for websites that don't support dark mode properly */
+html {
+    background-color: {{bg_primary}} !important;
+    color: {{fg_primary}} !important;
+}
+
+body {
+    background-color: {{bg_primary}} !important;
+    color: {{fg_primary}} !important;
+}
+
+/* =============================================================================
+ * Input Elements
+ * ============================================================================= */
+
+input, textarea, select {
+    background-color: {{bg_secondary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+    border-radius: 3px !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: {{accent_blue}} !important;
+    box-shadow: 0 0 0 2px {{accent_blue}}33 !important;
+}
+
+/* =============================================================================
+ * Buttons and Links
+ * ============================================================================= */
+
+button, .button, [role="button"] {
+    background-color: {{bg_secondary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+    border-radius: 3px !important;
+}
+
+button:hover, .button:hover, [role="button"]:hover {
+    background-color: {{bg_tertiary}} !important;
+    border-color: {{accent_blue}} !important;
+}
+
+a, a:visited {
+    color: {{accent_blue}} !important;
+}
+
+a:hover {
+    color: {{accent_green}} !important;
+}
+
+/* =============================================================================
+ * Code Elements
+ * ============================================================================= */
+
+code, pre, .highlight {
+    background-color: {{bg_tertiary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+    border-radius: 3px !important;
+}
+
+/* =============================================================================
+ * Tables
+ * ============================================================================= */
+
+table {
+    background-color: {{bg_primary}} !important;
+    color: {{fg_primary}} !important;
+}
+
+th {
+    background-color: {{bg_secondary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+}
+
+td {
+    background-color: {{bg_primary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+}
+
+tr:nth-child(even) td {
+    background-color: {{bg_secondary}} !important;
+}
+
+/* =============================================================================
+ * Modal and Dialog Elements
+ * ============================================================================= */
+
+.modal, .dialog, .popup {
+    background-color: {{bg_secondary}} !important;
+    color: {{fg_primary}} !important;
+    border: 1px solid {{border_active}} !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px {{bg_primary}}aa !important;
+}
+
+/* =============================================================================
+ * Navigation Elements
+ * ============================================================================= */
+
+nav, .navigation, .navbar {
+    background-color: {{bg_secondary}} !important;
+    border-bottom: 1px solid {{border_inactive}} !important;
+}
+
+.menu, .dropdown {
+    background-color: {{bg_secondary}} !important;
+    border: 1px solid {{border_inactive}} !important;
+    border-radius: 3px !important;
+}
+
+.menu-item:hover, .dropdown-item:hover {
+    background-color: {{accent_blue}} !important;
+    color: {{bg_primary}} !important;
+}
+
+/* =============================================================================
+ * Scrollbars (Webkit)
+ * ============================================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: {{bg_primary}};
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: {{bg_tertiary}};
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: {{accent_blue}};
+}
+
+::-webkit-scrollbar-track {
+    background-color: {{bg_secondary}};
+}
+
+/* =============================================================================
+ * Syntax Highlighting (if present)
+ * ============================================================================= */
+
+.highlight .k, .highlight .kd, .highlight .kn { color: {{accent_blue}} !important; }  /* Keywords */
+.highlight .s, .highlight .s1, .highlight .s2 { color: {{accent_green}} !important; } /* Strings */
+.highlight .c, .highlight .c1, .highlight .cm { color: {{fg_tertiary}} !important; } /* Comments */
+.highlight .n, .highlight .na { color: {{fg_primary}} !important; }                  /* Names */
+.highlight .m, .highlight .mi, .highlight .mf { color: {{accent_yellow}} !important; } /* Numbers */
+.highlight .o { color: {{accent_red}} !important; }                                  /* Operators */
+
+/* =============================================================================
+ * Site-specific Overrides
+ * ============================================================================= */
+
+/* GitHub */
+.github-dark-theme .Header,
+.application-main .Header {
+    background-color: {{bg_secondary}} !important;
+    border-bottom-color: {{border_inactive}} !important;
+}
+
+/* Stack Overflow */
+.topbar {
+    background-color: {{bg_secondary}} !important;
+}
+
+/* Reddit */
+.theme-beta .header-bottom-left {
+    background-color: {{bg_secondary}} !important;
+}
+
+/* Wikipedia */
+#mw-head {
+    background-color: {{bg_secondary}} !important;
+}
+
+/* YouTube */
+#masthead {
+    background-color: {{bg_secondary}} !important;
+}
+
+/* =============================================================================
+ * Custom Utility Classes
+ * ============================================================================= */
+
+.qute-dark-override {
+    background-color: {{bg_primary}} !important;
+    color: {{fg_primary}} !important;
+}
+
+.qute-accent-text {
+    color: {{accent_blue}} !important;
+}
+
+.qute-success-text {
+    color: {{accent_green}} !important;
+}
+
+.qute-warning-text {
+    color: {{accent_yellow}} !important;
+}
+
+.qute-error-text {
+    color: {{accent_red}} !important;
+}

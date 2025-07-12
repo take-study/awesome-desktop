@@ -1,0 +1,38 @@
+# Qutebrowser quickmarks
+# Quick bookmarks for frequently visited sites
+
+# Development
+github https://github.com
+gitlab https://gitlab.com
+stackoverflow https://stackoverflow.com
+mdn https://developer.mozilla.org
+archlinux https://archlinux.org
+aur https://aur.archlinux.org
+
+# Search & Reference
+wiki https://en.wikipedia.org
+startpage https://www.startpage.com
+ddg https://duckduckgo.com
+
+# Documentation
+qtdocs https://doc.qt.io
+python https://docs.python.org
+rust https://doc.rust-lang.org
+vim https://vimhelp.org
+
+# Tools & Utilities
+regex101 https://regex101.com
+jsonlint https://jsonlint.com
+caniuse https://caniuse.com
+
+# News & Community
+hackernews https://news.ycombinator.com
+reddit https://reddit.com
+lobsters https://lobste.rs
+
+# Entertainment
+youtube https://youtube.com
+twitch https://twitch.tv
+
+# Configuration
+qutebrowser https://qutebrowser.org/doc/help/
