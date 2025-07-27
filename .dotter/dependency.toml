@@ -1,24 +1,24 @@
 [zsh.variables.dependencies.completions]
 type = "git"
 url = "https://github.com/zsh-users/zsh-completions.git"
-path = "zsh/plugins/zsh-completions"
+path = "dependencies/zsh/zsh-completions"
 description = "Additional completion definitions for Zsh"
 
 [zsh.variables.dependencies.syntax-highlighting]
 type = "git"
 url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-path = "zsh/plugins/zsh-syntax-highlighting"
+path = "dependencies/zsh/zsh-syntax-highlighting"
 description = "Fish shell like syntax highlighting for Zsh"
 
 [zsh.variables.dependencies.auto-suggestions]
 type = "git"
 url = "https://github.com/zsh-users/zsh-autosuggestions.git"
-path = "zsh/plugins/zsh-autosuggestions"
+path = "dependencies/zsh/zsh-autosuggestions"
 description = "Fish-like autosuggestions for Zsh"
 
 [nvim.variables.dependencies.lazy]
 type = "git"
 url = "https://github.com/folke/lazy.nvim.git"
-path = "nvim/lazy"
+path = "dependencies/nvim/lazy"
 branch = "stable"
 description = "A modern plugin manager for Neovim"

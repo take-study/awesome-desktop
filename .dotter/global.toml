@@ -15,7 +15,7 @@ font_size_xlarge = "55"
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
 "nvim/lua" = "~/.config/nvim/lua"
-"nvim/lazy" = { target = "~/.local/share/nvim/lazy", type = "symbolic" }
+"dependencies/nvim" = { target = "~/.local/share/nvim", type = "symbolic" }
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
@@ -31,7 +31,7 @@ usegnupg = "1"
 "zsh/zshrc" = "~/.zshrc"
 "zsh/zshenv" = "~/.zshenv"
 "zsh/conf" = "~/.config/zsh/conf"
-"zsh/plugins" = { target = "~/.config/zsh/plugins", type = "symbolic" }
+"dependencies/zsh" = { target = "~/.config/zsh/plugins", type = "symbolic" }
 "zsh/local.zsh.example" = "~/.config/zsh/local.zsh.example"
 
 [hyprland]
