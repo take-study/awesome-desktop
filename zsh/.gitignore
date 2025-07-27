@@ -14,9 +14,7 @@ local.zsh
 *.temp
 
 # Plugin cache/compiled files
-plugins/**/*.zwc
-plugins/**/.git
-
+plugins/
 # OS generated files
 .DS_Store
 .DS_Store?

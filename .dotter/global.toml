@@ -12,10 +12,10 @@ font_size_medium = "12"
 font_size_large = "25"
 font_size_xlarge = "55"
 
-
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
 "nvim/lua" = "~/.config/nvim/lua"
+"nvim/lazy" = { target = "~/.local/share/nvim/lazy", type = "symbolic" }
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
@@ -49,10 +49,8 @@ depends = [
 ]
 
 [hyprland.variables]
-# Unicode prompt icons for different purposes:
-# 🚀 App launcher | 📋 Clipboard | 🧮 Calculator | 📊 Result | ⚠️ Error | ❯ General
 prompt_text = "󰣆 :"                          # App launcher (tofi-drun)
-clipboard_prompt = " :"                     # Clipboard manager  
+clipboard_prompt = " :"                     # Clipboard manager
 calc_prompt = " :"                          # Calculator input
 result_prompt = " :"                        # Calculator result
 error_prompt = " :"                         # Calculator error
@@ -119,7 +117,7 @@ default_home_dir = "$HOME"
 "lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
 
 [qutebrowser.variables]
-translate_target = "zh-CN"  # Default translation target language
+translate_target = "zh-CN" # Default translation target language
 
 [qutebrowser.files]
 "qutebrowser/config.py" = "~/.config/qutebrowser/config.py"
@@ -129,7 +127,7 @@ translate_target = "zh-CN"  # Default translation target language
 "qutebrowser/bookmarks" = "~/.config/qutebrowser/bookmarks/"
 "qutebrowser/theme.py" = "~/.config/qutebrowser/theme.py"
 "qutebrowser/userscripts" = "~/.config/qutebrowser/userscripts"
-"qutebrowser/userscripts/translate" = {target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic"}
+"qutebrowser/userscripts/translate" = { target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic" }
 
 [settings]
 default_target_type = "automatic"
