@@ -1,4 +1,7 @@
 #External Dependencies
+# Type: git ,file, archive, binary
+
+# Git Dependencies
 [zsh.variables.dependencies.zsh-completions]
 type = "git"
 url = "https://github.com/zsh-users/zsh-completions.git"
