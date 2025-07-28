@@ -56,49 +56,60 @@ manage_git_dependency() {
     if [[ -d "$path" ]]; then
         # Directory exists, check if it's a git repository
         if [[ -d "$path/.git" ]]; then
-            print_info "Updating existing repository: $path"
             cd "$path"
 
-            # Fetch latest changes
-            if git fetch origin >/dev/null 2>&1; then
-                # Determine target branch
-                if [[ -n "$branch" ]]; then
-                    target_branch="$branch"
-                else
-                    # Get remote default branch
-                    target_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
-                    # If that fails, try common branch names
-                    if ! git show-ref --verify --quiet "refs/remotes/origin/$target_branch"; then
-                        if git show-ref --verify --quiet "refs/remotes/origin/master"; then
-                            target_branch="master"
-                        elif git show-ref --verify --quiet "refs/remotes/origin/main"; then
-                            target_branch="main"
-                        else
-                            # Use current branch as fallback
-                            target_branch=$(git rev-parse --abbrev-ref HEAD)
-                        fi
+            # Determine target branch
+            if [[ -n "$branch" ]]; then
+                target_branch="$branch"
+            else
+                # Get remote default branch
+                target_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
+                # If that fails, try common branch names
+                if ! git show-ref --verify --quiet "refs/remotes/origin/$target_branch"; then
+                    if git show-ref --verify --quiet "refs/remotes/origin/master"; then
+                        target_branch="master"
+                    elif git show-ref --verify --quiet "refs/remotes/origin/main"; then
+                        target_branch="main"
+                    else
+                        # Use current branch as fallback
+                        target_branch=$(git rev-parse --abbrev-ref HEAD)
                     fi
                 fi
+            fi
 
-                current_branch=$(git rev-parse --abbrev-ref HEAD)
+            current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-                if [[ "$current_branch" != "$target_branch" ]]; then
-                    print_info "Switching to branch: $target_branch"
-                    git checkout "$target_branch" >/dev/null 2>&1 || {
-                        print_warning "Branch $target_branch not found, trying to create it"
-                        git checkout -b "$target_branch" "origin/$target_branch" >/dev/null 2>&1 || {
-                            print_error "Failed to switch to branch $target_branch"
-                            cd - >/dev/null
-                            return 1
-                        }
+            # Switch to target branch if needed
+            if [[ "$current_branch" != "$target_branch" ]]; then
+                print_info "Switching to branch: $target_branch"
+                git checkout "$target_branch" >/dev/null 2>&1 || {
+                    print_warning "Branch $target_branch not found, trying to create it"
+                    git checkout -b "$target_branch" "origin/$target_branch" >/dev/null 2>&1 || {
+                        print_error "Failed to switch to branch $target_branch"
+                        cd - >/dev/null
+                        return 1
                     }
-                fi
+                }
+            fi
 
-                # Pull latest changes
-                if git pull origin "$target_branch" >/dev/null 2>&1; then
-                    print_success "Updated $path"
+            # Get current local commit hash
+            local local_commit=$(git rev-parse HEAD 2>/dev/null)
+
+            # Fetch latest changes to get remote refs
+            if git fetch origin >/dev/null 2>&1; then
+                # Get remote commit hash
+                local remote_commit=$(git rev-parse "origin/$target_branch" 2>/dev/null)
+
+                if [[ -n "$local_commit" && -n "$remote_commit" && "$local_commit" == "$remote_commit" ]]; then
+                    print_success "$path is already up to date (commit: ${local_commit:0:8})"
                 else
-                    print_warning "Failed to pull latest changes for $path"
+                    print_info "Updating repository: $path (${local_commit:0:8} -> ${remote_commit:0:8})"
+                    # Pull latest changes
+                    if git pull origin "$target_branch" >/dev/null 2>&1; then
+                        print_success "Updated $path"
+                    else
+                        print_warning "Failed to pull latest changes for $path"
+                    fi
                 fi
             else
                 print_warning "Failed to fetch updates for $path"
@@ -140,21 +151,17 @@ main() {
     local failed_count=0
 
     {{#each dependencies}}
-    # Process dependency: {{@key}}
+    # Process dependency: {{@key}}.{{@key}}
     {{#if (eq this.type "git")}}
     if ! manage_git_dependency \
         "{{this.url}}" \
-        "{{this.path}}" \
-    {{#if this.branch }}
-        "{{this.branch}}" \
-    {{else}}
-        "master" \
-    {{/if}}
+        "dependencies/{{this.path}}" \
+        {{#if this.branch}} "{{this.branch}}" {{else}} "master" {{/if}} \
         "{{this.description}}"; then
         ((failed_count++))
     fi
     {{else}}
-    print_warning "Unsupported dependency type: {{this.type}} for {{@key}}"
+    print_warning "Unsupported dependency type: {{this.type}} for {{@../key}}.{{@key}}"
     {{/if}}
     {{/each}}
 

@@ -7,6 +7,7 @@ return {
 
         -- Setup fzf-lua with default options
         fzf.setup({
+            fzf_bin = 'sk',
             winopts = {
                 height = 0.85,
                 width = 0.80,
@@ -22,7 +23,7 @@ return {
                     horizontal = 'right:60%',
                 },
             },
-            keymap = {
+            keymap  = {
                 builtin = {
                     ["<F1>"] = "toggle-help",
                     ["<F2>"] = "toggle-fullscreen",
@@ -36,7 +37,7 @@ return {
                     ["ctrl-a"] = "select-all+accept",
                     ["ctrl-q"] = "select-all+accept",
                 },
-            },
+            }
         })
 
         -- Key mappings equivalent to telescope

@@ -1,24 +1,25 @@
-[zsh.variables.dependencies.completions]
+#External Dependencies
+[zsh.variables.dependencies.zsh-completions]
 type = "git"
 url = "https://github.com/zsh-users/zsh-completions.git"
-path = "dependencies/zsh/zsh-completions"
+path = "zsh/zsh-completions"
 description = "Additional completion definitions for Zsh"
 
-[zsh.variables.dependencies.syntax-highlighting]
+[zsh.variables.dependencies.zsh-syntax-highlighting]
 type = "git"
 url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-path = "dependencies/zsh/zsh-syntax-highlighting"
+path = "zsh/zsh-syntax-highlighting"
 description = "Fish shell like syntax highlighting for Zsh"
 
-[zsh.variables.dependencies.auto-suggestions]
+[zsh.variables.dependencies.zsh-autosuggestions]
 type = "git"
 url = "https://github.com/zsh-users/zsh-autosuggestions.git"
-path = "dependencies/zsh/zsh-autosuggestions"
+path = "zsh/zsh-autosuggestions"
 description = "Fish-like autosuggestions for Zsh"
 
 [nvim.variables.dependencies.lazy]
 type = "git"
 url = "https://github.com/folke/lazy.nvim.git"
-path = "dependencies/nvim/lazy"
+path = "nvim/lazy"
 branch = "stable"
 description = "A modern plugin manager for Neovim"
