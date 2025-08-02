@@ -47,15 +47,13 @@ depends = [
 ]
 
 [hyprland.variables]
-calc_prompt = " :"                                                                      # Calculator input
-result_prompt = " :"                                                                    # Calculator result
-error_prompt = " :"                                                                     # Calculator error
 wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 terminal_cmd = "alacritty msg create-window -e tmux new-session -A -s main"
 filemanager_cmd = "alacritty msg create-window --class=\"file-manager\" -e lf"
 launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
 clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
 process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -e btm"
+calculator_cmd = "tofi-calc"
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
@@ -68,9 +66,8 @@ process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -
 "hyprland/hypridle.conf" = "~/.config/hypr/hypridle.conf"
 "hyprland/hyprpaper.conf" = "~/.config/hypr/hyprpaper.conf"
 "wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
-"scripts/media-check.sh" = "~/.local/bin/media-check.sh"
-"scripts/volume-control.sh" = "~/.local/bin/volume-control.sh"
-"scripts/tofi-calc.sh" = "~/.local/bin/tofi-calc.sh"
+"scripts/media-check.sh" = "~/.local/bin/media-check"
+"scripts/volume-control.sh" = "~/.local/bin/volume-control"
 "hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
 
 [dunst.files]
@@ -86,12 +83,14 @@ process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -
 
 [tofi.files]
 "tofi/config" = "~/.config/tofi/config"
+"scripts/tofi-calc.sh" = "~/.local/bin/tofi-calc"
 
 [bottom.files]
 "bottom/bottom.toml" = "~/.config/bottom/bottom.toml"
 
 [gtk.variables]
 gtk_theme = "AweSome"
+
 [gtk.files]
 "gtk/settings2.ini" = "~/.gtkrc-2.0"
 "gtk/settings3.ini" = "~/.config/gtk-3.0/settings.ini"
@@ -100,7 +99,7 @@ gtk_theme = "AweSome"
 
 [lf.variables]
 terminal = "alacritty msg create-window --class file-manager"
-lf_wrapper_path = "~/.local/bin/lf-wrapper.sh"
+lf_wrapper_path = "$HOME/.local/bin/lf-wrapper.sh"
 default_home_dir = "$HOME"
 
 [lf.files]

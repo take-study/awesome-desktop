@@ -10,7 +10,7 @@ declare -A CMD_CACHE
 cmd_exists() {
     local cmd="$1"
     [[ -n "${CMD_CACHE[$cmd]}" ]] && return "${CMD_CACHE[$cmd]}"
-    
+
     if command -v "$cmd" >/dev/null 2>&1; then
         CMD_CACHE[$cmd]=0
         return 0
@@ -26,7 +26,7 @@ send_notification() {
     local summary="${2:-Calculator}"
     local message="$3"
     local urgency="${4:-normal}"
-    
+
     # Use dunstify if available, suppress output
     if cmd_exists dunstify; then
         dunstify -a "$title" -u "$urgency" "$summary" "$message" >/dev/null 2>&1
@@ -38,11 +38,11 @@ send_notification() {
 # Quick dependency check (optimized)
 check_dependencies() {
     local missing=()
-    
+
     cmd_exists bc || missing+=("bc")
-    cmd_exists wl-copy || missing+=("wl-clipboard") 
+    cmd_exists wl-copy || missing+=("wl-clipboard")
     cmd_exists tofi || missing+=("tofi")
-    
+
     if [[ ${#missing[@]} -gt 0 ]]; then
         send_notification "Calculator Error" "Missing dependencies:" "${missing[*]}" "critical"
         exit 1
@@ -54,7 +54,7 @@ check_dependencies
 
 # Get user input through tofi (optimized)
 input=$(echo "" | tofi \
-    --prompt-text "{{calc_prompt}}" \
+    --prompt-text " :" \
     --width 600 \
     --height 250 \
     --num-results 1 \
@@ -68,21 +68,21 @@ input=$(echo "" | tofi \
 # Enhanced input validation (optimized with single regex check)
 validate_input() {
     local expr="$1"
-    
+
     # Remove spaces and check for empty
     expr=${expr// /}
     [[ -z "$expr" ]] && return 1
-    
+
     # Single comprehensive dangerous pattern check
     [[ "$expr" =~ [\$\`\;\|\&\>\<] ]] && return 1
     [[ "$expr" =~ (sudo|rm|cat|exec|eval|system|import|include) ]] && return 1
-    
+
     # Check allowed mathematical characters only
     [[ "$expr" =~ ^[0-9+*/.()^epi[:alpha:]-]+$ ]] || return 1
-    
+
     # Remove functions and validate remaining characters
     local safe_expr="${expr//sqrt/}"
-    safe_expr="${safe_expr//sin/}" 
+    safe_expr="${safe_expr//sin/}"
     safe_expr="${safe_expr//cos/}"
     safe_expr="${safe_expr//tan/}"
     safe_expr="${safe_expr//log/}"
@@ -93,7 +93,7 @@ validate_input() {
     safe_expr="${safe_expr//atan/}"
     safe_expr="${safe_expr//asin/}"
     safe_expr="${safe_expr//acos/}"
-    
+
     [[ "$safe_expr" =~ ^[0-9+*/.()^-]*$ ]]
 }
 
@@ -106,11 +106,11 @@ validate_input "$input" || {
 # Enhanced function replacement for bc compatibility (optimized)
 process_input() {
     local expr="$1"
-    
+
     # Replace constants using parameter expansion (faster than sed)
     expr="${expr//pi/3.14159265358979323846}"
     expr="${expr//e/2.71828182845904523536}"
-    
+
     # Replace functions more efficiently
     expr="${expr//sqrt(/sqrt(}"
     expr="${expr//sin(/s(}"
@@ -121,7 +121,7 @@ process_input() {
     expr="${expr//ln(/l(}"
     expr="${expr//exp(/e(}"
     expr="${expr//abs(/sqrt(^2)}"
-    
+
     printf "%s" "$expr"
 }
 
@@ -134,7 +134,7 @@ if [[ -n "$result" && "$result" != "0" ]]; then
     # Simple result formatting
     result_formatted="${result%.*}"
     [[ "${result##*.}" != "00000000" ]] && result_formatted="${result%.0*}"
-    
+
     # Truncate long results
     if [[ ${#result_formatted} -gt 15 ]]; then
         display_text="$input = ${result_formatted:0:15}..."
@@ -143,26 +143,26 @@ if [[ -n "$result" && "$result" != "0" ]]; then
         display_text="$input = $result_formatted"
         full_result="$result_formatted"
     fi
-    
+
     # Show result (suppress tofi output)
     printf "%s\n" "$display_text" | tofi \
-        --prompt-text "{{result_prompt}}" \
+        --prompt-text " :" \
         --width 700 \
         --height 250 \
         --num-results 1 \
         --require-match false \
         --placeholder-text "Result copied to clipboard" >/dev/null 2>&1
-    
+
     # Copy to clipboard (suppress output)
     printf "%s" "$full_result" | wl-copy 2>/dev/null
 else
     # Show error (suppress output)
     printf "Error: %s\n" "$input" | tofi \
-        --prompt-text "{{error_prompt}}" \
+        --prompt-text " :" \
         --width 600 \
         --height 200 \
         --num-results 1 \
         --require-match false >/dev/null 2>&1
-    
+
     send_notification "Calculator Error" "Invalid expression: $input" "critical"
 fi
