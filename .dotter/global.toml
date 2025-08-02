@@ -41,20 +41,21 @@ depends = [
     "tofi",
     "fcitx5",
     "lf",
-    "xdg-desktop-portal-wlr",
-    "xdg-desktop-portal",
     "gtk",
     "bottom",
     "tmux",
 ]
 
 [hyprland.variables]
-prompt_text = "󰣆 :"                          # App launcher (tofi-drun)
-clipboard_prompt = " :"                     # Clipboard manager
-calc_prompt = " :"                          # Calculator input
-result_prompt = " :"                        # Calculator result
-error_prompt = " :"                         # Calculator error
+calc_prompt = " :"                                                                      # Calculator input
+result_prompt = " :"                                                                    # Calculator result
+error_prompt = " :"                                                                     # Calculator error
 wallpaper = "~/Pictures/wallpaper/wall1.jpg"
+terminal_cmd = "alacritty msg create-window -e tmux new-session -A -s main"
+filemanager_cmd = "alacritty msg create-window --class=\"file-manager\" -e lf"
+launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
+clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
+process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -e btm"
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
@@ -70,6 +71,7 @@ wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 "scripts/media-check.sh" = "~/.local/bin/media-check.sh"
 "scripts/volume-control.sh" = "~/.local/bin/volume-control.sh"
 "scripts/tofi-calc.sh" = "~/.local/bin/tofi-calc.sh"
+"hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
 
 [dunst.files]
 "dunst/dunstrc" = "~/.config/dunst/dunstrc"
@@ -96,17 +98,10 @@ gtk_theme = "AweSome"
 "gtk/settings4.ini" = "~/.config/gtk-4.0/settings.ini"
 "gtk/themes" = "~/.themes"
 
-[xdg-desktop-portal-wlr.variables]
-terminal_cmd = "alacritty --class file-manager"
+[lf.variables]
+terminal = "alacritty msg create-window --class file-manager"
 lf_wrapper_path = "~/.local/bin/lf-wrapper.sh"
 default_home_dir = "$HOME"
-
-[xdg-desktop-portal-wlr.files]
-"xdg-desktop-portal-wlr/config" = "~/.config/xdg-desktop-portal-wlr/config"
-"scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper.sh"
-
-[xdg-desktop-portal.files]
-"xdg-desktop-portal/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
 
 [lf.files]
 "lf/lfrc" = { target = "~/.config/lf/lfrc", type = "symbolic" }
@@ -115,6 +110,8 @@ default_home_dir = "$HOME"
 "lf/icons" = "~/.config/lf/icons"
 "lf/colors" = "~/.config/lf/colors"
 "lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
+"lf/xdg-filepicker/config" = "~/.config/xdg-desktop-portal-wlr/config"
+"scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper.sh"
 
 [qutebrowser.variables]
 translate_target = "zh-CN" # Default translation target language

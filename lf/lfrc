@@ -135,7 +135,7 @@ cmd inportal source "~/.config/lf/xdg-filepicker/inportal"
 # Hooks
 # ============================================================================
 # Save last directory on exit and restore on start
-cmd on-init &{{ 
+cmd on-init &{{
     # Create the directory if it doesn't exist
     mkdir -p ~/.cache/lf
     # Restore last directory if exists
@@ -160,8 +160,8 @@ cmd on-quit &{{
 map <enter> shell
 #map x $$f
 #map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
+map o $xdg-open "$f"
+map O $xdg-open --ask $f
 
 # File operations
 map <c-c> copy

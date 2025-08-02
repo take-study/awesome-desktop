@@ -4,7 +4,7 @@
 # "inportal" file to you lf config folder and include this line anywhere inside your
 # main config (lfrc):
 # cmd inportal source "~/.config/lf/inportal"
-# The script also assumes you are using the {{terminal_cmd}} terminal. 
+# The script also assumes you are using the {{terminal_cmd}} terminal.
 # If you are using something else, adjust cmd variable accordingly.
 #
 # More technical info
@@ -35,7 +35,7 @@ path="$4"
 output="$5"
 
 cmd="/usr/bin/lf"
-termcmd="{{terminal_cmd}}"
+termcmd="{{terminal}}"
 lfxdgbasedir=~/.config/lf/xdg-filepicker
 
 if [ "$save" = "1" ]; then
@@ -47,10 +47,10 @@ if [ "$save" = "1" ]; then
         -command "source $lfxdgbasedir/save" "$@"
 elif [ "$directory" = "1" ] && [ "$multiple" = "1" ] ; then
     $termcmd  -e  $cmd \
-        -command "source $lfxdgbasedir/selectanything" 
+        -command "source $lfxdgbasedir/selectanything"
 elif [ "$directory" = "1" ]; then
     $termcmd  -e $cmd \
-        -command "source $lfxdgbasedir/selectdir" 
+        -command "source $lfxdgbasedir/selectdir"
 elif [ "$multiple" = "1" ]; then
     $termcmd  -e $cmd \
         -command "source $lfxdgbasedir/selectfiles"
