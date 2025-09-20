@@ -1,0 +1,107 @@
+# Rime custom phrase dictionary
+# encoding: utf-8
+# 自定义短语词典
+# 格式：短语<Tab>编码<Tab>权重(可选)
+
+# 常用短语
+现在	xianzai	1
+谢谢	xiexie	1
+不客气	bukeqi	1
+没关系	meiguanxi	1
+再见	zaijian	1
+你好	nihao	1
+请问	qingwen	1
+对不起	duibuqi	1
+没问题	meiwenti	1
+好的	haode	1
+
+# 网络用语
+666	liu	1
+yyds	yyds	1
+awsl	awsl	1
+xswl	xswl	1
+emo	emo	1
+cpu	cpu	1
+gpu	gpu	1
+ram	ram	1
+ssd	ssd	1
+hdd	hdd	1
+
+# 编程相关
+function	function	1
+return	return	1
+import	import	1
+export	export	1
+const	const	1
+let	let	1
+var	var	1
+class	class	1
+interface	interface	1
+async	async	1
+await	await	1
+promise	promise	1
+callback	callback	1
+github	github	1
+gitlab	gitlab	1
+linux	linux	1
+windows	windows	1
+macos	macos	1
+android	android	1
+ios	ios	1
+
+# 常用符号和表情
+→	jiantou	1
+←	zuojiantou	1
+↑	shangjiantou	1
+↓	xiajiantou	1
+√	dui	1
+×	cuo	1
+※	zhuyishihao	1
+…	shengluehao	1
+——	pozhehao	1
+''	danyin	1
+""	shuangyin	1
+（）	kuohao	1
+【】	fangkuohao	1
+《》	shuminghao	1
+
+# 单位
+℃	sheshidu	1
+℉	huashidu	1
+°	du	1
+%	baifenhao	1
+‰	qianfenhao	1
+α	alpha	1
+β	beta	1
+γ	gamma	1
+δ	delta	1
+π	pi	1
+Ω	omega	1
+
+# 日期时间
+今天	jintian	1
+明天	mingtian	1
+昨天	zuotian	1
+现在	xianzai	1
+上午	shangwu	1
+下午	xiawu	1
+晚上	wanshang	1
+中午	zhongwu	1
+
+# 常用地名
+北京	beijing	1
+上海	shanghai	1
+广州	guangzhou	1
+深圳	shenzhen	1
+杭州	hangzhou	1
+南京	nanjing	1
+成都	chengdu	1
+西安	xian	1
+武汉	wuhan	1
+重庆	chongqing	1
+
+# 自定义短语示例（可以根据个人需要修改）
+# 格式说明：
+# 短语	编码	权重
+# 权重越高，优先级越高
+# 可以不填权重，默认为1

@@ -53,12 +53,10 @@ case "$(file --dereference --brief --mime-type "$file")" in
             fallback
         fi
         ;;
-    application/zip | application/x-rar*)
+    application/zip | application/x-rar* | application/x-xz | application/gzip)
         # Archive contents
-        if command -v unzip > /dev/null 2>&1 && [[ "$file" == *.zip ]]; then
-            unzip -l "$file"
-        elif command -v unrar > /dev/null 2>&1 && [[ "$file" == *.rar ]]; then
-            unrar l "$file"
+        if command -v bsdtar > /dev/null 2>&1 ; then
+            bsdtar -tf "$file"
         else
             fallback
         fi

@@ -75,11 +75,15 @@ calculator_cmd = "tofi-calc"
 
 [tmux.files]
 "tmux/tmux.conf" = "~/.config/tmux/tmux.conf"
+[fcitx5.variables]
+rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 
 [fcitx5.files]
 "fcitx5/config" = "~/.config/fcitx5/config"
 "fcitx5/profile" = "~/.config/fcitx5/profile"
 "fcitx5/conf" = "~/.config/fcitx5/conf"
+"fcitx5/rime" = "~/.local/share/fcitx5/rime"
+"fcitx5/rime/im" = "~/.local/share/fcitx5/rime"
 
 [tofi.files]
 "tofi/config" = "~/.config/tofi/config"
@@ -90,15 +94,17 @@ calculator_cmd = "tofi-calc"
 
 [gtk.variables]
 gtk_theme = "AweSome"
+gtk_icon_theme = "Tela-nord-dark"
+gtk_cursor_theme = "volantes_cursors"
 
 [gtk.files]
 "gtk/settings2.ini" = "~/.gtkrc-2.0"
 "gtk/settings3.ini" = "~/.config/gtk-3.0/settings.ini"
 "gtk/settings4.ini" = "~/.config/gtk-4.0/settings.ini"
-"gtk/themes" = "~/.themes"
+"gtk/themes" = "~/.local/share/themes"
 
 [lf.variables]
-terminal = "alacritty msg create-window --class file-manager"
+terminal = "alacritty --class file-manager"
 lf_wrapper_path = "$HOME/.local/bin/lf-wrapper.sh"
 default_home_dir = "$HOME"
 

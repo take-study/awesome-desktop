@@ -39,7 +39,7 @@ ModifierOnlyKeyTimeout=100
 # Active By Default
 ActiveByDefault=False
 # Reset state on Focus In
-resetStateWhenFocusIn=False
+resetStateWhenFocusIn=No
 # Share Input State
 ShareInputState=All
 # Show preedit in application
@@ -66,9 +66,7 @@ DisabledAddons=
 PreloadInputMethod=True
 # Allow input method in the password field
 AllowInputMethodForPassword=False
-# Respect application focus for input method activation
-RespectApplicationFocus=True
 # Show preedit text when typing password
 ShowPreeditForPassword=False
 # Interval of saving user data in minutes
-AutoSavePeriod=5
+AutoSavePeriod=

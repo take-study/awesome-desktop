@@ -157,7 +157,7 @@ cmd on-quit &{{
 # ============================================================================
 
 # Basic operations
-map <enter> shell
+map <enter> open
 #map x $$f
 #map X !$f
 map o $xdg-open "$f"
