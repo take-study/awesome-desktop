@@ -180,7 +180,7 @@ map C push :zip<space>
 map T push :tar<space>
 map a push :mkdir<space>
 map A push :mkfile<space>
-map r bulk-rename
+#map r bulk-rename
 
 # Navigation shortcuts
 map gd cd ~/Documents
