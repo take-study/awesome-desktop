@@ -131,5 +131,33 @@ translate_target = "zh-CN" # Default translation target language
 "qutebrowser/userscripts" = "~/.config/qutebrowser/userscripts"
 "qutebrowser/userscripts/translate" = { target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic" }
 
+[niri]
+depends = [
+    "alacritty",
+    "dunst",
+    "tofi",
+    "fcitx5",
+    "lf",
+    "gtk",
+    "bottom",
+    "tmux",
+]
+
+[niri.variables]
+wallpaper = "~/Pictures/wallpaper/wall1.jpg"
+terminal_cmd = "alacritty msg create-window -e tmux new-session -A -s main"
+filemanager_cmd = "alacritty msg create-window --class=\"file-manager\" -e lf"
+launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
+clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
+process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -e btm"
+calculator_cmd = "tofi-calc"
+
+[niri.files]
+"niri/config.kdl" = "~/.config/niri/config.kdl"
+"wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
+"scripts/media-check.sh" = "~/.local/bin/media-check"
+"scripts/volume-control.sh" = "~/.local/bin/volume-control"
+"scripts/niri/niri-session" = "~/.local/bin/niri-session"
+
 [settings]
 default_target_type = "automatic"
