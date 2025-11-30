@@ -42,19 +42,19 @@ if [ "$save" = "1" ]; then
     # make the saving appear in the last path
     set -- "$(dirname "$path")"
     FILENAME="$(basename "$path")"
-    $termcmd  -e $cmd \
+    $termcmd $cmd \
         -command "set user_filename '$FILENAME'" \
         -command "source $lfxdgbasedir/save" "$@"
 elif [ "$directory" = "1" ] && [ "$multiple" = "1" ] ; then
-    $termcmd  -e  $cmd \
+    $termcmd $cmd \
         -command "source $lfxdgbasedir/selectanything"
 elif [ "$directory" = "1" ]; then
-    $termcmd  -e $cmd \
+    $termcmd $cmd \
         -command "source $lfxdgbasedir/selectdir"
 elif [ "$multiple" = "1" ]; then
-    $termcmd  -e $cmd \
+    $termcmd $cmd \
         -command "source $lfxdgbasedir/selectfiles"
 else
-    $termcmd  -e $cmd \
+    $termcmd $cmd \
         -command "source $lfxdgbasedir/selectfile"
 fi

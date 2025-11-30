@@ -1,0 +1,15 @@
+[Unit]
+Description=Start fcitx5
+Documentation=https://fcitx-im.org/wiki/Fcitx_5/zh-cn
+After=graphical-session.target
+
+[Service]
+Type=exec
+# Repurpose XDG Autostart filtering
+ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
+ExecStart=fcitx5 -r
+Restart=on-failure
+Slice=app-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target

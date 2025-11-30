@@ -25,7 +25,3 @@ shadow = "#0a0c12"
 hover = "#282C34"
 accent_alt = "#4a90e2"
 fg_disabled = "#5C6370"
-# Hyprland specific (without #)
-hypr_border_active = "61AFEF"
-hypr_border_inactive = "282C34"
-hypr_shadow = "0A0C12EE"

@@ -6,11 +6,12 @@ depends = []
 [default.variables]
 font = "Maple Mono NF CN"
 ui_font = "Maple Mono NF CN"
-font_size = "11"
+font_size = "12"
 font_size_small = "8"
 font_size_medium = "12"
 font_size_large = "25"
 font_size_xlarge = "55"
+wallpaper = "~/Pictures/wallpaper/wall1.jpg"
 
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
@@ -19,6 +20,7 @@ font_size_xlarge = "55"
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
+"systemd/alacritty.service" = "~/.config/systemd/user/alacritty.service"
 
 [zsh]
 depends = ["nvim"]
@@ -35,32 +37,15 @@ usegnupg = "1"
 "zsh/local.zsh.example" = "~/.config/zsh/local.zsh.example"
 
 [hyprland]
-depends = [
-    "alacritty",
-    "dunst",
-    "tofi",
-    "fcitx5",
-    "lf",
-    "gtk",
-    "bottom",
-    "tmux",
-]
+depends = [ "uwsm" ]
 
 [hyprland.variables]
-wallpaper = "~/Pictures/wallpaper/wall1.jpg"
-terminal_cmd = "alacritty msg create-window -e tmux new-session -A -s main"
-filemanager_cmd = "alacritty msg create-window --class=\"file-manager\" -e lf"
-launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
-clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
-process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -e btm"
 calculator_cmd = "tofi-calc"
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
-"hyprland/environment.conf" = "~/.config/hypr/environment.conf"
 "hyprland/variables.conf" = "~/.config/hypr/variables.conf"
 "hyprland/keybinds.conf" = "~/.config/hypr/keybinds.conf"
-"hyprland/autostart.conf" = "~/.config/hypr/autostart.conf"
 "hyprland/windowrules.conf" = "~/.config/hypr/windowrules.conf"
 "hyprland/hyprlock.conf" = "~/.config/hypr/hyprlock.conf"
 "hyprland/hypridle.conf" = "~/.config/hypr/hypridle.conf"
@@ -69,12 +54,16 @@ calculator_cmd = "tofi-calc"
 "scripts/media-check.sh" = "~/.local/bin/media-check"
 "scripts/volume-control.sh" = "~/.local/bin/volume-control"
 "hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
+"systemd/hypridle.service" = "~/.config/systemd/user/hypridle.service"
+"systemd/hyprpaper.service" = "~/.config/systemd/user/hyprpaper.service"
 
 [dunst.files]
 "dunst/dunstrc" = "~/.config/dunst/dunstrc"
+"systemd/dunst.service" = "~/.config/systemd/user/dunst.service"
 
 [tmux.files]
 "tmux/tmux.conf" = "~/.config/tmux/tmux.conf"
+
 [fcitx5.variables]
 rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 
@@ -84,6 +73,11 @@ rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 "fcitx5/conf" = "~/.config/fcitx5/conf"
 "fcitx5/rime" = "~/.local/share/fcitx5/rime"
 "fcitx5/rime/im" = "~/.local/share/fcitx5/rime"
+"systemd/fcitx5.service" = "~/.config/systemd/user/fcitx5.service"
+
+[tofi.variables]
+launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
+clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
 
 [tofi.files]
 "tofi/config" = "~/.config/tofi/config"
@@ -104,7 +98,6 @@ gtk_cursor_theme = "volantes_cursors"
 "gtk/themes" = "~/.local/share/themes"
 
 [lf.variables]
-terminal = "alacritty --class file-manager"
 lf_wrapper_path = "$HOME/.local/bin/lf-wrapper.sh"
 default_home_dir = "$HOME"
 
@@ -132,16 +125,7 @@ translate_target = "zh-CN" # Default translation target language
 "qutebrowser/userscripts/translate" = { target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic" }
 
 [niri]
-depends = [
-    "alacritty",
-    "dunst",
-    "tofi",
-    "fcitx5",
-    "lf",
-    "gtk",
-    "bottom",
-    "tmux",
-]
+depends = ["uwsm"]
 
 [niri.variables]
 wallpaper = "~/Pictures/wallpaper/wall1.jpg"
@@ -158,6 +142,35 @@ calculator_cmd = "tofi-calc"
 "scripts/media-check.sh" = "~/.local/bin/media-check"
 "scripts/volume-control.sh" = "~/.local/bin/volume-control"
 "scripts/niri/niri-session" = "~/.local/bin/niri-session"
+
+[uwsm]
+depends = ["foot",
+"cliphist",
+"dunst",
+"tofi",
+"fcitx5",
+"gtk"
+]
+
+[uwsm.files]
+"uwsm/global.env" = "~/.config/uwsm/env"
+"uwsm/hyprland.env" = "~/.config/uwsm/env-hyprland"
+
+[cliphist.files]
+"systemd/cliphist.service" = "~/.config/systemd/user/cliphist.service"
+
+[foot]
+depends = ["tmux", "lf", "bottom"]
+
+[foot.variables]
+terminal = "footclient --app-id=\"file-manager\""
+terminal_cmd = "footclient tmux new-session -A -s main"
+filemanager_cmd = "footclient --app-id=\"file-manager\" lf"
+process_manager_cmd = "footclient --app-id=\"process-manager\" btm"
+
+[foot.files]
+"foot/foot.ini" = "~/.config/foot/foot.ini"
+"systemd/foot.service" = "~/.config/systemd/user/foot.service"
 
 [settings]
 default_target_type = "automatic"
