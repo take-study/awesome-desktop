@@ -9,6 +9,7 @@ Type=exec
 ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=alacritty --daemon
 Restart=on-failure
+RestartSec=2s
 Slice=app-graphical.slice
 
 [Install]

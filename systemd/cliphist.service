@@ -10,6 +10,7 @@ Type=exec
 ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=wl-paste --watch cliphist -max-items 10 store
 Restart=on-failure
+RestartSec=2s
 Slice=app-graphical.slice
 
 [Install]

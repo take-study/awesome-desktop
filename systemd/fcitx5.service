@@ -1,7 +1,8 @@
 [Unit]
 Description=Start fcitx5
 Documentation=https://fcitx-im.org/wiki/Fcitx_5/zh-cn
-After=graphical-session.target
+Requires=rclone.service
+After=graphical-session.target rclone.service
 
 [Service]
 Type=exec
@@ -9,6 +10,7 @@ Type=exec
 ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=fcitx5 -r
 Restart=on-failure
+RestartSec=2s
 Slice=app-graphical.slice
 
 [Install]

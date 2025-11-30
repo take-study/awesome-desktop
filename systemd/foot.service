@@ -10,6 +10,7 @@ ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire
 ExecStart=foot --server
 Restart=on-failure
 Slice=app-graphical.slice
+RestartSec=2s
 
 [Install]
 WantedBy=graphical-session.target

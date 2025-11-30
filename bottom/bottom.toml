@@ -12,7 +12,7 @@ dot_marker = false
 rate = "1s"
 
 # Whether to put the CPU legend to the left
-cpu_left_legend = false
+cpu_left_legend = true
 
 # Whether to set CPU% on a process to be based on the total CPU or just current usage
 current_usage = false
@@ -42,7 +42,7 @@ time_delta = 15000
 hide_time = false
 
 # Use basic mode
-basic = false
+basic = true
 
 # Use the old network legend style
 use_old_network_legend = false
@@ -90,10 +90,10 @@ enable_cache_memory = true
 retention = "10m"
 
 # Where to place the legend for the memory widget
-memory_legend = "top-right"
+memory_legend = "bottom-left"
 
 # Where to place the legend for the network widget
-network_legend = "top-right"
+network_legend = "top"
 
 # Processes widget configuration
 [processes]
@@ -108,7 +108,7 @@ default = "all"
 # Disk widget configuration
 [disk]
 # The columns shown by the disk widget
-columns = ["Disk", "Mount"]
+columns = ["Disk", "Mount", "Used", "Free", "Total", "Used%", "R/s", "W/s"]
 
 # Custom styling - matching OneDarkPro theme
 [styles]
@@ -166,12 +166,9 @@ disabled_text = { color = "{{fg_disabled}}" }
 ratio = 30
 [[row.child]]
 ratio = 2
-type = "cpu"
-[[row.child]]
-[[row.child.child]]
-type = "net"
-[[row.child.child]]
 type = "mem"
+[[row.child]]
+type = "cpu"
 
 [[row]]
 ratio = 40
