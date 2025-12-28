@@ -107,6 +107,7 @@ depends = ["uwsm"]
 "niri/workspace.kdl" = "~/.config/niri/workspace.kdl"
 "niri/niri.env" = "~/.config/uwsm/env-niri"
 "niri/niri-portals.conf" = "~/.config/xdg-desktop-portal/niri-portals.conf"
+"systemd/swaybg.service" = "~/.config/systemd/user/swaybg.service"
 
 [uwsm]
 depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk"]

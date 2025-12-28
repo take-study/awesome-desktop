@@ -1,0 +1,15 @@
+[Unit]
+Description=Start wallpapaer
+After=graphical-session.target
+
+[Service]
+Type=exec
+# Repurpose XDG Autostart filtering
+ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland:Niri:niri" ""
+ExecStart=sh -c "swaybg -i {{wallpaper}} -m fill"
+Restart=on-failure
+Slice=app-graphical.slice
+RestartSec=2s
+
+[Install]
+WantedBy=graphical-session.target

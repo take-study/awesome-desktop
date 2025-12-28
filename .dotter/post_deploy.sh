@@ -26,6 +26,10 @@ systemctl --user enable hyprpaper.service
 chmod +x ~/.config/qutebrowser/userscripts/*
 {{/if}}
 
+{{#if dotter.packages.niri}}
+systemctl --user enable swaybg.service
+{{/if}}
+
 {{#if dotter.packages.nvim}}
 {{#if download_dependencies}}
 cp -r dependencies/nvim/* ~/.local/share/nvim/
