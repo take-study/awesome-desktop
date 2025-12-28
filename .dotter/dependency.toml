@@ -23,6 +23,6 @@ description = "Fish-like autosuggestions for Zsh"
 [nvim.variables.dependencies.lazy]
 type = "git"
 url = "https://github.com/folke/lazy.nvim.git"
-path = "nvim/lazy"
+path = "nvim/lazy/lazy.nvim"
 branch = "stable"
 description = "A modern plugin manager for Neovim"

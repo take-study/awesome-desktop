@@ -554,4 +554,8 @@ main() {
 }
 
 # Run main function
+{{#if download_dependencies}}
 main "$@"
+{{/if}}
+
+chmod +x ./scripts/*

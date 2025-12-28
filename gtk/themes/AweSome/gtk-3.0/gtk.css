@@ -121,7 +121,7 @@ window > decoration {
     outline-style: dashed;
     outline-offset: -3px;
     outline-width: 1px;
-    -gtk-outline-radius: 2px;
+    -gtk-outline-radius: 0px;
 }
 
 /* Window styles */

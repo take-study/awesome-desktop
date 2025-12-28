@@ -1,22 +1,10 @@
-[helpers]
-
-[default]
-depends = []
-
-[default.variables]
-font = "Maple Mono NF CN"
-ui_font = "Maple Mono NF CN"
-font_size = "12"
-font_size_small = "8"
-font_size_medium = "12"
-font_size_large = "25"
-font_size_xlarge = "55"
-wallpaper = "~/Pictures/wallpaper/wall1.jpg"
+[settings]
+default_target_type = "automatic"
 
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
 "nvim/lua" = "~/.config/nvim/lua"
-"dependencies/nvim" = { target = "~/.local/share/nvim", type = "symbolic" }
+"scripts/editor.sh" = "~/.local/bin/editor"
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
@@ -37,10 +25,7 @@ usegnupg = "1"
 "zsh/local.zsh.example" = "~/.config/zsh/local.zsh.example"
 
 [hyprland]
-depends = [ "uwsm" ]
-
-[hyprland.variables]
-calculator_cmd = "tofi-calc"
+depends = ["uwsm"]
 
 [hyprland.files]
 "hyprland/hyprland.conf" = "~/.config/hypr/hyprland.conf"
@@ -50,12 +35,10 @@ calculator_cmd = "tofi-calc"
 "hyprland/hyprlock.conf" = "~/.config/hypr/hyprlock.conf"
 "hyprland/hypridle.conf" = "~/.config/hypr/hypridle.conf"
 "hyprland/hyprpaper.conf" = "~/.config/hypr/hyprpaper.conf"
-"wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
-"scripts/media-check.sh" = "~/.local/bin/media-check"
-"scripts/volume-control.sh" = "~/.local/bin/volume-control"
 "hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
 "systemd/hypridle.service" = "~/.config/systemd/user/hypridle.service"
 "systemd/hyprpaper.service" = "~/.config/systemd/user/hyprpaper.service"
+"hyprland/hyprland.env" = "~/.config/uwsm/env-hyprland"
 
 [dunst.files]
 "dunst/dunstrc" = "~/.config/dunst/dunstrc"
@@ -75,21 +58,13 @@ rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 "fcitx5/rime/im" = "~/.local/share/fcitx5/rime"
 "systemd/fcitx5.service" = "~/.config/systemd/user/fcitx5.service"
 
-[tofi.variables]
-launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
-clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
-
 [tofi.files]
 "tofi/config" = "~/.config/tofi/config"
 "scripts/tofi-calc.sh" = "~/.local/bin/tofi-calc"
 
 [bottom.files]
 "bottom/bottom.toml" = "~/.config/bottom/bottom.toml"
-
-[gtk.variables]
-gtk_theme = "AweSome"
-gtk_icon_theme = "Tela-nord-dark"
-gtk_cursor_theme = "volantes_cursors"
+"scripts/processmanager.sh" = "~/.local/bin/processmanager"
 
 [gtk.files]
 "gtk/settings2.ini" = "~/.gtkrc-2.0"
@@ -110,51 +85,36 @@ default_home_dir = "$HOME"
 "lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
 "lf/xdg-filepicker/config" = "~/.config/xdg-desktop-portal-wlr/config"
 "scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper.sh"
-
-[qutebrowser.variables]
-translate_target = "zh-CN" # Default translation target language
+"lf/lf.desktop" = "~/.local/share/applications/lf.desktop"
+"scripts/filemanager.sh" = "~/.local/bin/filemanager"
 
 [qutebrowser.files]
 "qutebrowser/config.py" = "~/.config/qutebrowser/config.py"
-"qutebrowser/autoconfig.yml" = "~/.config/qutebrowser/autoconfig.yml"
 "qutebrowser/stylesheet.css" = "~/.config/qutebrowser/stylesheet.css"
 "qutebrowser/quickmarks" = "~/.config/qutebrowser/quickmarks"
 "qutebrowser/bookmarks" = "~/.config/qutebrowser/bookmarks/"
 "qutebrowser/theme.py" = "~/.config/qutebrowser/theme.py"
-"qutebrowser/userscripts" = "~/.config/qutebrowser/userscripts"
+"qutebrowser/userscripts/qute-keepassxc" = "~/.config/qutebrowser/userscripts/qute-keepassxc-local"
 "qutebrowser/userscripts/translate" = { target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic" }
 
 [niri]
 depends = ["uwsm"]
 
-[niri.variables]
-wallpaper = "~/Pictures/wallpaper/wall1.jpg"
-terminal_cmd = "alacritty msg create-window -e tmux new-session -A -s main"
-filemanager_cmd = "alacritty msg create-window --class=\"file-manager\" -e lf"
-launcher_cmd = "tofi-drun --drun-launch=true --prompt-text \"󰣆 :\""
-clipboard_cmd = "cliphist list | tofi --prompt-text \" :\" | cliphist decode | wl-copy"
-process_manager_cmd = "alacritty msg create-window --class=\"process-manager\" -e btm"
-calculator_cmd = "tofi-calc"
-
 [niri.files]
 "niri/config.kdl" = "~/.config/niri/config.kdl"
-"wallpaper/wall1.jpg" = "~/Pictures/wallpaper/wall1.jpg"
-"scripts/media-check.sh" = "~/.local/bin/media-check"
-"scripts/volume-control.sh" = "~/.local/bin/volume-control"
-"scripts/niri/niri-session" = "~/.local/bin/niri-session"
+"niri/keybinds.kdl" = "~/.config/niri/keybinds.kdl"
+"niri/windowrule.kdl" = "~/.config/niri/windowrule.kdl"
+"niri/workspace.kdl" = "~/.config/niri/workspace.kdl"
+"niri/niri.env" = "~/.config/uwsm/env-niri"
+"niri/niri-portals.conf" = "~/.config/xdg-desktop-portal/niri-portals.conf"
 
 [uwsm]
-depends = ["foot",
-"cliphist",
-"dunst",
-"tofi",
-"fcitx5",
-"gtk"
-]
+depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk"]
 
 [uwsm.files]
 "uwsm/global.env" = "~/.config/uwsm/env"
-"uwsm/hyprland.env" = "~/.config/uwsm/env-hyprland"
+"scripts/media-check.sh" = "~/.local/bin/media-check"
+"scripts/volume-control.sh" = "~/.local/bin/volume-control"
 
 [cliphist.files]
 "systemd/cliphist.service" = "~/.config/systemd/user/cliphist.service"
@@ -162,15 +122,10 @@ depends = ["foot",
 [foot]
 depends = ["tmux", "lf", "bottom"]
 
-[foot.variables]
-terminal = "footclient --app-id=\"file-manager\""
-terminal_cmd = "footclient tmux new-session -A -s main"
-filemanager_cmd = "footclient --app-id=\"file-manager\" lf"
-process_manager_cmd = "footclient --app-id=\"process-manager\" btm"
-
 [foot.files]
 "foot/foot.ini" = "~/.config/foot/foot.ini"
 "systemd/foot.service" = "~/.config/systemd/user/foot.service"
+"scripts/terminal.sh" = "~/.local/bin/terminal"
 
-[settings]
-default_target_type = "automatic"
+[fuzzel.files]
+"fuzzel/fuzzel.ini" = "~/.config/fuzzel/fuzzel.ini"

@@ -7,7 +7,7 @@ After=graphical-session.target rclone.service
 [Service]
 Type=exec
 # Repurpose XDG Autostart filtering
-ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
+ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland:Niri:niri" ""
 ExecStart=fcitx5 -r
 Restart=on-failure
 RestartSec=2s

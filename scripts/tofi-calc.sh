@@ -54,12 +54,12 @@ check_dependencies
 
 # Get user input through tofi (optimized)
 input=$(echo "" | tofi \
-    --prompt-text " :" \
-    --width 600 \
-    --height 250 \
-    --num-results 1 \
-    --require-match false \
-    --auto-accept-single false \
+        --prompt-text " :" \
+        --width 600 \
+        --height 250 \
+        --num-results 1 \
+        --require-match false \
+        --auto-accept-single false \
     --placeholder-text "Enter expression (e.g., sqrt(16), sin(pi/2), 2^8)" 2>/dev/null)
 
 # Exit if no input

@@ -1,0 +1,17 @@
+workspace "terminal"
+
+workspace "browser"
+
+workspace "code"
+
+workspace "chat"
+
+workspace "music"
+
+workspace "6"
+
+workspace "7"
+
+workspace "8"
+
+workspace "keepass"

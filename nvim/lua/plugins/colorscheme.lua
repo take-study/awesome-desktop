@@ -6,9 +6,9 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require('onedark').setup({
+            require("onedark").setup({
                 -- Main options
-                style = 'darker',
+                style = "darker",
                 transparent = false,
                 term_colors = true,
                 ending_tildes = false,
@@ -16,11 +16,11 @@ return {
 
                 -- Code style
                 code_style = {
-                    comments = 'italic',
-                    keywords = 'none',
-                    functions = 'none',
-                    strings = 'none',
-                    variables = 'none'
+                    comments = "italic",
+                    keywords = "none",
+                    functions = "none",
+                    strings = "none",
+                    variables = "none",
                 },
 
                 -- Custom colors using global theme variables
@@ -86,11 +86,11 @@ return {
                     GitSignsAdd = { fg = "{{success}}" },
                     GitSignsChange = { fg = "{{warning}}" },
                     GitSignsDelete = { fg = "{{error}}" },
-                }
+                },
             })
 
             -- Apply the colorscheme
-            vim.cmd.colorscheme('onedark')
+            vim.cmd.colorscheme("onedark")
         end,
-    }
+    },
 }

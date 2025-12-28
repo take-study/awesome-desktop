@@ -35,7 +35,7 @@ path="$4"
 output="$5"
 
 cmd="/usr/bin/lf"
-termcmd="{{terminal}}"
+termcmd="{{terminal}} {{class_arg}} \"file-manager\""
 lfxdgbasedir=~/.config/lf/xdg-filepicker
 
 if [ "$save" = "1" ]; then
@@ -46,7 +46,7 @@ if [ "$save" = "1" ]; then
         -command "set user_filename '$FILENAME'" \
         -command "source $lfxdgbasedir/save" "$@"
 elif [ "$directory" = "1" ] && [ "$multiple" = "1" ] ; then
-    $termcmd $cmd \
+    $termcmd {{class_arg}} "" $cmd \
         -command "source $lfxdgbasedir/selectanything"
 elif [ "$directory" = "1" ]; then
     $termcmd $cmd \

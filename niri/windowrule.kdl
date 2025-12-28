@@ -1,0 +1,66 @@
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+include "workspace.kdl"
+
+window-rule{
+    match app-id=r#"^.*zed.*"#
+    match app-id=r#"^.*editor.*"#
+    open-on-workspace "code"
+    open-focused true
+}
+
+window-rule {
+    match app-id=r#"^.*process-manager.*"#
+    match app-id=r#"^.*file-manager.*"#
+    match app-id=r#"^.*imv.*"#
+    match app-id=r#"^.*mpv.*"#
+    open-floating true
+    open-focused true
+    default-column-width { fixed 1200; }
+    default-window-height { fixed 800; }
+}
+
+
+window-rule{
+    match app-id=r#"^.*firefox.*"#
+    match app-id=r#"^.*qutebrowser.*"#
+    open-on-workspace "browser"
+}
+
+window-rule{
+    match app-id=r#"^.*terminal.*"#
+    open-on-workspace "terminal"
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Example: block out two password managers from screen capture.
+// (This example rule is commented out with a "/-" in front.)
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    exclude title=r#"^.*访问请求.*"#
+    block-out-from "screen-capture"
+    open-on-workspace "keepass"
+}
+
+window-rule {
+    match app-id=r#"^.*keepassxc.*"# title=r#"^.*访问请求.*"#
+    open-floating true
+    open-focused true
+    default-column-width { fixed 600; }
+    default-window-height { fixed 500; }
+}
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+window-rule {
+    geometry-corner-radius 0
+    clip-to-geometry true
+}

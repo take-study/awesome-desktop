@@ -137,20 +137,27 @@ cmd inportal source "~/.config/lf/xdg-filepicker/inportal"
 # Save last directory on exit and restore on start
 cmd on-init &{{
     # Create the directory if it doesn't exist
-    mkdir -p ~/.cache/lf
-    # Restore last directory if exists
-    if [ -f ~/.cache/lf/lastdir ]; then
-        lastdir=$(cat ~/.cache/lf/lastdir)
-        if [ -d "$lastdir" ]; then
-            lf -remote "send $id cd '$lastdir'"
-        fi
-    fi
+    #mkdir -p ~/.cache/lf
+    ## Restore last directory if exists
+    #if [ -f ~/.cache/lf/lastdir ]; then
+    #    lastdir=$(cat ~/.cache/lf/lastdir)
+    #    if [ -d "$lastdir" ]; then
+    #        lf -remote "send $id cd '$lastdir'"
+    #    fi
+    #fi
 }}
+
 
 # Save current directory and quit
 cmd on-quit &{{
     printf '%s' "$PWD" > ~/.cache/lf/lastdir
 }}
+
+cmd editor-open &{{
+    sh -c "niri msg action close-window"
+    sh -c "editor $f" 
+}}
+
 
 # ============================================================================
 # Key Mappings
@@ -162,6 +169,7 @@ map <enter> open
 #map X !$f
 map o $xdg-open "$f"
 map O $xdg-open --ask $f
+map <c-o> editor-open && quit
 
 # File operations
 map <c-c> copy

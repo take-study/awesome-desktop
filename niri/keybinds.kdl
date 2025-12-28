@@ -1,0 +1,372 @@
+binds {
+    // Keys consist of modifiers separated by + signs, followed by an XKB key name
+    // in the end. To find an XKB name for a particular key, you may use a program
+    // like wev.
+    //
+    // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
+    // when running as a winit window.
+    //
+    // Most actions that you can bind here can also be invoked programmatically with
+    // `niri msg action do-something`.
+
+    // ===================================================================
+    // 数字键 (1-9) - 工作区操作
+    // ===================================================================
+
+    Mod+1 { focus-workspace "terminal"; }
+    Mod+2 { focus-workspace "browser"; }
+    Mod+3 { focus-workspace "code"; }
+    Mod+4 { focus-workspace "chat"; }
+    Mod+5 { focus-workspace "music"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "keepass"; }
+
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
+
+    // ===================================================================
+    // BracketLeft / BracketRight - 窗口消费/排出
+    // ===================================================================
+
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    // ===================================================================
+    // C - 居中操作
+    // ===================================================================
+
+    Mod+C { center-column; }
+    Mod+Ctrl+C { center-visible-columns; }
+
+    // ===================================================================
+    // Comma / Period - 窗口消费/排出
+    // ===================================================================
+
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    // ===================================================================
+    // D - 应用启动器
+    // ===================================================================
+
+    Mod+D hotkey-overlay-title="Run application launcher" { spawn-sh "{{launcher_cmd}}"; }
+
+    // ===================================================================
+    // Delete - 退出
+    // ===================================================================
+
+    Ctrl+Alt+Delete { quit; }
+
+    // ===================================================================
+    // Down - 向下操作
+    // ===================================================================
+
+    Mod+Down  { focus-window-down; }
+    Mod+Shift+Down  { focus-monitor-down; }
+    Mod+Ctrl+Down  { move-window-down; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+
+    // ===================================================================
+    // E - 文件管理器
+    // ===================================================================
+
+    Mod+E hotkey-overlay-title="Open File Manager" {spawn-sh "{{filemanager}}" ;}
+
+    // ===================================================================
+    // End - 最后位置
+    // ===================================================================
+
+    Mod+End  { focus-column-last; }
+    Mod+Ctrl+End  { move-column-to-last; }
+
+    // ===================================================================
+    // Equal - 增加尺寸
+    // ===================================================================
+
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // ===================================================================
+    // Escape - 快捷键抑制
+    // ===================================================================
+
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // ===================================================================
+    // F - 最大化/全屏/展开
+    // ===================================================================
+
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+
+    // ===================================================================
+    // H - 向左操作 (Vim风格)
+    // ===================================================================
+
+    Mod+H     { focus-column-left; }
+    Mod+Alt+H { focus-monitor-left; }
+    Mod+Ctrl+H { move-column-left; }
+    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+
+    // ===================================================================
+    // Home - 首位置
+    // ===================================================================
+
+    Mod+Home { focus-column-first; }
+    Mod+Ctrl+Home { move-column-to-first; }
+
+    // ===================================================================
+    // I - 工作区向上/窗口选择
+    // ===================================================================
+
+    Mod+I         { focus-workspace-up; }
+    Mod+Ctrl+I { spawn-sh "niri msg pick-window";}
+
+    // ===================================================================
+    // J - 向下操作 (Vim风格)
+    // ===================================================================
+
+    Mod+J     { focus-window-down; }
+    Mod+Alt+J { focus-monitor-down; }
+    // Mod+Alt+J { move-window-down; }
+    Mod+Shift+J         { move-workspace-down; }
+    Mod+Ctrl+J         { move-column-to-workspace-down; }
+    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+
+    // ===================================================================
+    // K - 向上操作 (Vim风格)
+    // ===================================================================
+
+    Mod+K     { focus-window-up; }
+    Mod+Alt+K { focus-monitor-up; }
+    // Mod+Alt+K { move-window-up; }
+    Mod+Shift+K         { move-workspace-up; }
+    Mod+Ctrl+K         { move-column-to-workspace-up; }
+    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+
+    // ===================================================================
+    // L - 向右操作 (Vim风格) / 锁屏
+    // ===================================================================
+
+    Mod+L     { focus-column-right; }
+    Mod+Alt+L { focus-monitor-right; }
+    // Mod+Alt+L { move-column-right; }
+    Mod+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+
+    // ===================================================================
+    // Left - 向左操作
+    // ===================================================================
+
+    Mod+Left  { focus-column-left; }
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+
+    // ===================================================================
+    // Minus - 减少尺寸
+    // ===================================================================
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+
+    // ===================================================================
+    // O - 概览切换
+    // ===================================================================
+
+    Mod+O repeat=false { toggle-overview; }
+
+    // ===================================================================
+    // P - 进程管理器
+    // ===================================================================
+
+    Mod+Shift+P hotkey-overlay-title="Open Process Manager" {spawn-sh "{{processmanager}}";}
+    //Mod+Shift+P { power-off-monitors; }
+
+    // ===================================================================
+    // Page_Down / Page_Up - 工作区切换
+    // ===================================================================
+
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up   { focus-workspace-up; }
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+
+    // ===================================================================
+    // Q - 关闭/退出
+    // ===================================================================
+
+    Mod+Q repeat=false { close-window; }
+    Mod+Shift+Q { quit; }
+
+    // ===================================================================
+    // R - 预设/重置
+    // ===================================================================
+
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+
+    // ===================================================================
+    // Return - 终端
+    // ===================================================================
+
+    Mod+Return hotkey-overlay-title="Open Terminal" {spawn-sh "{{terminal_gui}}";}
+
+    // ===================================================================
+    // Right - 向右操作
+    // ===================================================================
+
+    Mod+Right { focus-column-right; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+    // ===================================================================
+    // S - 截图 / 屏幕阅读器
+    // ===================================================================
+
+    Mod+S { screenshot-window; }
+    Mod+Shift+S { screenshot; }
+    Mod+Alt+S { screenshot-screen; }
+    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+
+    // ===================================================================
+    // Slash - 帮助
+    // ===================================================================
+
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // ===================================================================
+    // U - 工作区向下
+    // ===================================================================
+
+    Mod+U         { focus-workspace-down; }
+
+    // ===================================================================
+    // Up - 向上操作
+    // ===================================================================
+
+    Mod+Up    { focus-window-up; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+
+    // ===================================================================
+    // V - 剪贴板/窗口浮动
+    // ===================================================================
+
+    Mod+Alt+V { toggle-window-floating; }
+    Mod+Shift+V hotkey-overlay-title="Show clipboard history" { spawn-sh "{{clipboard_cmd}}"; }
+    Mod+V { switch-focus-between-floating-and-tiling; }
+
+    // ===================================================================
+    // W - 标签显示切换
+    // ===================================================================
+
+    Mod+W { toggle-column-tabbed-display; }
+
+    // ===================================================================
+    // 滚轮操作
+    // ===================================================================
+
+    // 基本滚轮工作区切换
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+
+    // 滚轮列操作
+    Mod+WheelScrollRight { focus-column-right; }
+    Mod+WheelScrollLeft  { focus-column-left; }
+
+    // 修饰键滚轮操作
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+
+    Mod+Ctrl+WheelScrollDown { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   { move-column-to-workspace-up; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    // ===================================================================
+    // 功能键和媒体控制
+    // ===================================================================
+
+    // 音量控制
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "{{volume_up}}"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "{{volume_down}}"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "{{volume_mute}}"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    // 媒体控制
+    XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    // 亮度控制
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    // ===================================================================
+    // 注释掉的备选绑定
+    // ===================================================================
+
+    // Alternative commands that move across workspaces when reaching
+    // the first or last window in a column.
+    // Mod+J     { focus-window-or-workspace-down; }
+    // Mod+K     { focus-window-or-workspace-up; }
+    // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+    // ...
+
+    // And you can also move a whole workspace to another monitor:
+    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    // ...
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+    // ...
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+1 { move-window-to-workspace 1; }
+
+    // Switches focus between the current and the previous workspace.
+    // Mod+Tab { focus-workspace-previous; }
+
+    // Cycling through the presets in reverse order is also possible.
+    // Mod+R { switch-preset-column-width-back; }
+
+    // Actions to switch layouts.
+    // Note: if you uncomment these, make sure you do NOT have
+    // a matching layout switch hotkey configured in xkb options above.
+    // Having both at once on the same hotkey will break the switching,
+    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
+    // Mod+Space       { switch-layout "next"; }
+    // Mod+Shift+Space { switch-layout "prev"; }
+
+    // Similarly, you can bind touchpad scroll "ticks".
+    // Touchpad scrolling is continuous, so for these binds it is split into
+    // discrete intervals.
+    // These binds are also affected by touchpad's natural-scroll, so these
+    // example binds are "inverted", since we have natural-scroll enabled for
+    // touchpads by default.
+    // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
+    // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
+}
