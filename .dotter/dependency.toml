@@ -20,9 +20,10 @@ url = "https://github.com/zsh-users/zsh-autosuggestions.git"
 path = "zsh/zsh-autosuggestions"
 description = "Fish-like autosuggestions for Zsh"
 
-[nvim.variables.dependencies.lazy]
-type = "git"
-url = "https://github.com/folke/lazy.nvim.git"
-path = "nvim/lazy/lazy.nvim"
-branch = "stable"
-description = "A modern plugin manager for Neovim"
+# [nvim.variables.dependencies.lazy]
+# type = "git"
+# filter = "blob:none"
+# url = "https://github.com/folke/lazy.nvim.git"
+# path = "nvim/lazy/lazy.nvim"
+# branch = "stable"
+# description = "A modern plugin manager for Neovim"

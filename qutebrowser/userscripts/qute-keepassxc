@@ -481,7 +481,7 @@ def main():
             return
         creds = kp.get_logins(args.url)
         if not creds:
-            error("No credentials found")
+            error(f"未找到密码{args.url}")
             return
         cred = select_account(creds)
         if not cred:

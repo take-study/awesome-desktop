@@ -1,5 +1,6 @@
 return {
     "igorlfs/nvim-dap-view",
+    version = "*",
     dependencies = {
         "mason-org/mason.nvim",
         "jay-babu/mason-nvim-dap.nvim",

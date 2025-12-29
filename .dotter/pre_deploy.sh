@@ -389,6 +389,7 @@ manage_git_dependency() {
     local path="$2"
     local branch="$3"
     local description="$4"
+    local filter="$5"
 
     print_info "Managing dependency: $description"
 
@@ -470,21 +471,25 @@ manage_git_dependency() {
         else
             print_warning "$path exists but is not a git repository. Removing and re-cloning."
             rm -rf "$path"
-            manage_git_dependency "$url" "$path" "$branch" "$description"
+            manage_git_dependency "$url" "$path" "$branch" "$description" "$filter"
         fi
     else
         # Directory doesn't exist, clone it
         print_info "Cloning repository: $url -> $path"
+        git_cmd="git clone"
+        if [[ -n "$filter" ]]; then
+            git_cmd="$git_cmd --filter=$filter"
+        fi
 
         if [[ -n "$branch" ]]; then
-            if git clone --branch "$branch" --depth 1 "$url" "$path" >/dev/null 2>&1; then
+            if $($git_cmd --branch $branch --depth 1 $url $path >/dev/null 2>&1); then
                 print_success "Cloned $path (branch: $branch)"
             else
                 print_error "Failed to clone $url (branch: $branch)"
                 return 1
             fi
         else
-            if git clone --depth 1 "$url" "$path" >/dev/null 2>&1; then
+            if $($git_cmd $url $path >/dev/null 2>&1); then
                 print_success "Cloned $path"
             else
                 print_error "Failed to clone $url"
@@ -509,7 +514,8 @@ main() {
         "{{this.url}}" \
         "dependencies/{{this.path}}" \
         {{#if this.branch}}"{{this.branch}}"{{else}}"master"{{/if}} \
-        "{{this.description}}"; then
+        "{{this.description}}" \
+        {{#if this.filter}}"{{this.filter}}"{{else}}""{{/if}}; then
         ((failed_count++))
     fi
     {{else if (eq this.type "file")}}

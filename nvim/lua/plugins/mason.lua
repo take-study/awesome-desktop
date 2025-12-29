@@ -1,5 +1,6 @@
 return {
     "mason-org/mason-lspconfig.nvim",
+    version = "*",
     dependencies = {
         {
             "mason-org/mason.nvim",
@@ -35,7 +36,7 @@ return {
         require("mason").setup()
         -- Note: `nvim-lspconfig` needs to be in 'runtimepath' by the time you set up mason-lspconfig.nvim
         require("mason-lspconfig").setup({
-            nsure_installed = { "lua_ls" },
+            ensure_installed = { "lua_ls", "stylua", "prettier" },
             automatic_enable = true,
         })
     end,

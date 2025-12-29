@@ -1,6 +1,5 @@
 return {
-    "amitds1997/remote-nvim.nvim",
-    version = "*", -- Pin to GitHub releases
+    "take-study/remote-nvim.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim", -- For standard functions
         "MunifTanjim/nui.nvim", -- To build the plugin UI
@@ -21,27 +20,24 @@ return {
                 },
             },
             client_callback = function(port, _)
-                vim.fn.jobstart(
-                    {
-                        "{{terminal}}",
-                        "{{class_arg}}",
-                        '"editor"',
-                        "nvim",
-                        "--server",
-                        ("localhost:%s"):format(port),
-                        "--remote-ui",
-                    },
-                    {
-                        detach = true,
-                        on_exit = function(job_id, code)
-                            if code ~= 0 then
-                                vim.notify(("Local client failed with exit code %s"):format(code), vim.log.levels.ERROR)
-                            else
-                                vim.notify("Open new editor success", vim.log.levels.INFO)
-                            end
-                        end,
-                    }
-                )
+                vim.fn.jobstart({
+                    "{{terminal}}",
+                    "{{class_arg}}",
+                    '"editor"',
+                    "nvim",
+                    "--server",
+                    ("localhost:%s"):format(port),
+                    "--remote-ui",
+                }, {
+                    detach = true,
+                    on_exit = function(job_id, code)
+                        if code ~= 0 then
+                            vim.notify(("Local client failed with exit code %s"):format(code), vim.log.levels.ERROR)
+                        else
+                            vim.notify("Open new editor success", vim.log.levels.INFO)
+                        end
+                    end,
+                })
                 -- require("remote-nvim.ui").float_term(("{{terminal}} {{class_arg}} \"editor\" nvim --server localhost:%s --remote-ui"):format(port), function(exit_code)
                 --     if exit_code ~= 0 then
                 --         vim.notify(("Local client failed with exit code %s"):format(exit_code), vim.log.levels.ERROR)

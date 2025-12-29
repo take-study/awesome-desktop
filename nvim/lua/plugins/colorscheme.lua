@@ -2,6 +2,7 @@
 return {
     {
         "navarasu/onedark.nvim",
+        version = "*",
         name = "onedark",
         lazy = false,
         priority = 1000,

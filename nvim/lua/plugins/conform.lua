@@ -1,5 +1,6 @@
 return {
     "stevearc/conform.nvim",
+    version = "*",
     opts = {},
     config = function()
         local conform = require("conform")
@@ -17,7 +18,10 @@ return {
                 toml = { "taplo" },
 
                 sh = { "beautysh" },
-                -- javascript = { "prettierd", "prettier", stop_after_first = true },
+
+                json = { "prettier" },
+
+                javascript = { "prettier" },
             },
         })
         vim.api.nvim_create_autocmd("BufWritePre", {
