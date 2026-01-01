@@ -24,7 +24,19 @@ return {
 
         local items = {}
 
+        -- 将 sessions.detected 转换为数组并按最后修改时间排序
+        local session_list = {}
         for _, value in pairs(sessions.detected) do
+            table.insert(session_list, value)
+        end
+
+        -- 按最后修改时间降序排序（最新的在前面）
+        table.sort(session_list, function(a, b)
+            return a.modify_time > b.modify_time
+        end)
+
+        -- 添加排序后的 sessions 到 items
+        for _, value in ipairs(session_list) do
             table.insert(
                 items,
                 new_section(value.name, function()

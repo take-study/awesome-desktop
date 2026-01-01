@@ -40,3 +40,5 @@ require("theme").setup()
 
 -- Load keybinds
 require("keybind")
+
+vim.fn.setenv("SEARXNG_API_URL", "https://search.hbubli.cc/")
