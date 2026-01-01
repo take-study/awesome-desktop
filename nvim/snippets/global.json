@@ -1,0 +1,26 @@
+{
+  "TODO": {
+    "prefix": "todo",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE TODO:"
+  },
+  "HACK": {
+    "prefix": "hack",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE HACK:"
+  },
+  "FIX": {
+    "prefix": "fix",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE FIX:"
+  },
+  "NOTE": {
+    "prefix": "NOTE",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE NOTE:"
+  },
+  "TEST": {
+    "prefix": "test",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE TEST:"
+  },
+  "WARN": {
+    "prefix": "warn",
+    "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE WARN:"
+  }
+}

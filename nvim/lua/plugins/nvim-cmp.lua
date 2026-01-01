@@ -1,11 +1,14 @@
 return {
     "hrsh7th/nvim-cmp",
     version = "*",
+    enabled = false,
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "abeldekat/cmp-mini-snippets",
     },
+    event = "InsertEnter",
     opts = function()
         -- Register nvim-cmp lsp capabilities
         vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
@@ -44,6 +47,7 @@ return {
                 { name = "nvim_lsp" },
                 { name = "path" },
                 { name = "buffer" },
+                { name = "mini_snippets" },
             }),
             experimental = {
                 -- only show ghost text when we show ai completions
@@ -52,6 +56,14 @@ return {
                 } or false,
             },
             sorting = defaults.sorting,
+            snippet = {
+                expand = function(args) -- mini.snippets expands snippets from lsp...
+                    local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+                    insert({ body = args.body }) -- Insert at cursor
+                    cmp.resubscribe({ "TextChangedI", "TextChangedP" })
+                    require("cmp.config").set_onetime({ sources = {} })
+                end,
+            },
         }
     end,
 }

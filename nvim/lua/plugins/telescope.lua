@@ -12,6 +12,20 @@ return {
             { "<leader>fg", builtin.live_grep, desc = "Telescope live grep" },
             { "<leader>fb", builtin.buffers, desc = "Telescope buffers" },
             { "<leader>fh", builtin.help_tags, desc = "Telescope help tags" },
+            {
+                "<leader>fr",
+                [[:%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
+                desc = "Quick Replace",
+                mode = { "n", "v" },
+            },
+            {
+                "<leader>fs",
+                function()
+                    vim.cmd("excutte 'normal! /<C-r><C-w><CR>'")
+                end,
+                desc = "Quick Search",
+                mode = { "n", "v" },
+            },
         }
     end,
 }

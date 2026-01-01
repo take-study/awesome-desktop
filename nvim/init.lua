@@ -40,6 +40,3 @@ require("theme").setup()
 
 -- Load keybinds
 require("keybind")
-
--- Autocmd
-require("autocmd")

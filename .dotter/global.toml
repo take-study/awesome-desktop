@@ -4,6 +4,7 @@ default_target_type = "automatic"
 [nvim.files]
 "nvim/init.lua" = "~/.config/nvim/init.lua"
 "nvim/lua" = "~/.config/nvim/lua"
+"nvim/snippets" = "~/.config/nvim/snippets"
 "scripts/editor.sh" = "~/.local/bin/editor"
 
 [alacritty.files]

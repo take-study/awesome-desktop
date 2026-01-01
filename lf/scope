@@ -29,7 +29,7 @@ case "$(file --dereference --brief --mime-type "$file")" in
     image/*)
         # Image preview
         if command -v chafa > /dev/null 2>&1; then
-            chafa -s "${width}x${height}" "$file"
+            chafa -f sixels -s "${width}x${height}" "$file"
             #imv "$file"
         elif command -v img2txt > /dev/null 2>&1; then
             img2txt --gamma=0.6 --width="$width" "$file"
