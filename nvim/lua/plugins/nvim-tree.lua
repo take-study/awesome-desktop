@@ -47,9 +47,15 @@ return {
         })
     end,
     keys = function()
-        local api = require("nvim-tree.api")
         return {
-            { "<leader>e", api.tree.toggle, desc = "Toggle NvimTree" },
+            {
+                "<leader>e",
+                function()
+                    local api = require("nvim-tree.api")
+                    api.tree.toggle({ find_file = true })
+                end,
+                desc = "Toggle NvimTree",
+            },
         }
     end,
 }

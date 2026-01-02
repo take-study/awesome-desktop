@@ -113,7 +113,16 @@ return {
         local dap = require("dap")
         local dap_view = require("dap-view")
         return {
-            { "<F5>", dap.continue, desc = "Start debug" },
+            {
+                "<F5>",
+                function()
+                    if vim.fn.filereadable(".nvim/launch.json") == 1 then
+                        require("dap.ext.vscode").load_launchjs(".nvim/launch.json", {})
+                    end
+                    dap.contuine()
+                end,
+                desc = "Start debug",
+            },
             { "<F10>", dap.step_over, desc = "Dap step over" },
             { "<F11>", dap.step_into, desc = "Dap step into" },
             { "<F12>", dap.step_out, desc = "Dap step out" },
@@ -128,7 +137,7 @@ return {
                 end,
                 desc = "Set conditaion breakpoint",
             },
-            { "<leader>t", dap_view.toggle, desc = "Toggle breakpoint" },
+            { "<leader>bt", dap_view.toggle, desc = "Toggle Dap view" },
         }
     end,
 }
