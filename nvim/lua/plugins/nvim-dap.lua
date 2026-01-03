@@ -8,7 +8,6 @@ return {
     },
     lazy = true,
     config = function()
-        local dap = require("dap")
         vim.cmd("hi DapBreakpointColor guifg={{error}}")
         vim.cmd("hi DapStoppedIcon guifg={{warning}}")
         vim.cmd("hi DapStoppedLine guibg={{bg_secondary}}")
@@ -23,17 +22,20 @@ return {
             "DapStopped",
             { text = "", texthl = "DapStoppedIcon", linehl = "DapStoppedLine", numhl = "" }
         )
-        dap.adapters.codelldb = {
-            type = "executable",
-            command = "codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
-        }
+        require("mason-nvim-dap").setup({
+            handlers = {
+                function(config)
+                    require("mason-nvim-dap").default_setup(config)
+                end,
+            },
+        })
         require("dap-view").setup({
             winbar = {
                 show = true,
                 -- You can add a "console" section to merge the terminal with the other views
-                sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+                sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
                 -- Must be one of the sections declared above
-                default_section = "watches",
+                default_section = "scopes",
                 -- Configure each section individually
                 base_sections = {
                     breakpoints = {
@@ -83,7 +85,7 @@ return {
                 position = "below",
                 terminal = {
                     width = 0.5,
-                    position = "left",
+                    position = "right",
                     -- List of debug adapters for which the terminal should be ALWAYS hidden
                     hide = {},
                     -- Hide the terminal when starting a new session
@@ -116,10 +118,10 @@ return {
             {
                 "<F5>",
                 function()
-                    if vim.fn.filereadable(".nvim/launch.json") == 1 then
-                        require("dap.ext.vscode").load_launchjs(".nvim/launch.json", {})
+                    if vim.fn.filereadable(".vscode/launch.json") then
+                        require("dap.ext.vscode").load_launchjs(nil, {})
                     end
-                    dap.contuine()
+                    dap.continue()
                 end,
                 desc = "Start debug",
             },
@@ -137,7 +139,17 @@ return {
                 end,
                 desc = "Set conditaion breakpoint",
             },
-            { "<leader>bt", dap_view.toggle, desc = "Toggle Dap view" },
+            {
+                "<leader>dt",
+                dap_view.toggle,
+                desc = "Toggle Dap view",
+            },
+            {
+                "<leader>dw",
+                dap_view.add_expr,
+                desc = "Add expresion to watch",
+                mode = { "n", "v" },
+            },
         }
     end,
 }

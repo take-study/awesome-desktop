@@ -89,6 +89,7 @@ return {
                     GitSignsDelete = { fg = "{{error}}" },
                 },
             })
+            require("onedark").load()
 
             -- Apply the colorscheme
             vim.cmd.colorscheme("onedark")
