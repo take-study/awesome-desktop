@@ -91,12 +91,13 @@ default_home_dir = "$HOME"
 
 [qutebrowser.files]
 "qutebrowser/config.py" = "~/.config/qutebrowser/config.py"
-"qutebrowser/stylesheet.css" = "~/.config/qutebrowser/stylesheet.css"
+"qutebrowser/css" = "~/.config/qutebrowser/css"
 "qutebrowser/quickmarks" = "~/.config/qutebrowser/quickmarks"
 "qutebrowser/bookmarks" = "~/.config/qutebrowser/bookmarks/"
 "qutebrowser/theme.py" = "~/.config/qutebrowser/theme.py"
 "qutebrowser/userscripts/qute-keepassxc" = "~/.config/qutebrowser/userscripts/qute-keepassxc-local"
 "qutebrowser/userscripts/translate" = { target = "~/.config/qutebrowser/userscripts/translate", type = "symbolic" }
+"qutebrowser/greasemonkey" = "~/.local/share/qutebrowser/greasemonkey"
 
 [niri]
 depends = ["uwsm"]
@@ -111,7 +112,7 @@ depends = ["uwsm"]
 "systemd/swaybg.service" = "~/.config/systemd/user/swaybg.service"
 
 [uwsm]
-depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk"]
+depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk", "qt"]
 
 [uwsm.files]
 "uwsm/global.env" = "~/.config/uwsm/env"
@@ -131,3 +132,11 @@ depends = ["tmux", "lf", "bottom"]
 
 [fuzzel.files]
 "fuzzel/fuzzel.ini" = "~/.config/fuzzel/fuzzel.ini"
+"scripts/fuzzel-polkit-agent.sh" = "~/.local/bin/fuzzel-polkit-agent"
+"systemd/fuzzel-polkit-agent.service" = "~/.config/systemd/user/fuzzel-polkit-agent.service"
+
+[qt.files]
+"qt/colors" = "~/.config/qt5ct/colors"
+
+[zellij.files]
+"zellij/config.kdl" = "~/.config/zellij/config.kdl"

@@ -25,7 +25,7 @@ return {
         require("mason").setup()
         -- Note: `nvim-lspconfig` needs to be in 'runtimepath' by the time you set up mason-lspconfig.nvim
         require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "stylua", "prettier" },
+            ensure_installed = { "lua_ls", "stylua" },
             automatic_enable = true,
         })
         vim.api.nvim_create_autocmd("LspAttach", {

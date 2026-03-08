@@ -20,6 +20,7 @@ setopt NUMERICGLOBSORT            # Sort filenames numerically when it makes sen
 setopt PROMPTSUBST                # Enable command substitution in prompt
 
 # Performance-focused module loading
+source "$ZSH_CONFIG_DIR/conf/colors.zsh"
 source "$ZSH_CONFIG_DIR/conf/history.zsh"
 source "$ZSH_CONFIG_DIR/conf/plugins.zsh"
 source "$ZSH_CONFIG_DIR/conf/prompt.zsh"

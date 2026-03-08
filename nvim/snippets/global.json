@@ -22,5 +22,21 @@
   "WARN": {
     "prefix": "warn",
     "body": "$LINE_COMMENT $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE WARN:"
+  },
+  "launch": {
+    "prefix": "launch",
+    "body": [
+      "{",
+      "  \"version\": \"0.2.0\",",
+      "  \"configurations\": [{",
+      "  \"name\": \"Launch\",",
+      "  \"type\": \"$1\",",
+      "  \"request\": \"launch\",",
+      "  \"cwd\": \"${2:$3{workspaceFolder}}\",",
+      "  \"program\": \"${4:$2}/$5\",",
+      "  \"console\": \"internalConsole\"",
+      "  }]",
+      "}"
+    ]
   }
 }

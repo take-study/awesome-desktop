@@ -40,6 +40,8 @@ c.content.javascript.enabled = True
 c.content.geolocation = "ask"
 c.content.notifications.enabled = "ask"
 c.content.autoplay = False
+c.content.pdfjs = True
+c.content.user_stylesheets = ["~/.config/qutebrowser/css/stylesheet.css"]
 
 # Image handling - ensure QR codes and important graphics display correctly
 c.content.images = True  # Enable images
@@ -151,25 +153,13 @@ c.url.start_pages = ["https://start.duckduckgo.com"]
 # Enable ad blocking (requires qutebrowser-adblock)
 try:
     c.content.blocking.enabled = True
+    c.content.javascript.enabled = True
 except:
     pass  # Ignore if adblock is not available
 
 # =============================================================================
 # Per-domain Settings
 # =============================================================================
-
-# Allow specific sites to use all features
-config.set("content.javascript.enabled", True, "*://github.com/*")
-config.set("content.javascript.enabled", True, "*://gitlab.com/*")
-config.set("content.cookies.accept", "all", "*://github.com")
-config.set("content.cookies.accept", "all", "*://gitlab.com")
-
-# Password manager related settings
-# Enable JavaScript for common login sites (needed for password filling)
-config.set("content.javascript.enabled", True, "*://accounts.google.com/*")
-config.set("content.javascript.enabled", True, "*://login.microsoftonline.com/*")
-config.set("content.javascript.enabled", True, "*://*.amazonaws.com/*")
-config.set("content.javascript.enabled", True, "*://auth0.com/*")
 
 # Allow notifications for password manager feedback
 config.set("content.notifications.enabled", True, "qute://*")

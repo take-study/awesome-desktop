@@ -36,15 +36,15 @@ zstyle ':completion:*' verbose true
 # Source zsh-autosuggestions if available (optimized)
 if [[ -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]]; then
     source "$ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    
+
     # Optimized autosuggestion settings for performance
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$ZSH_AUTOSUGGEST_COLOR"
     ZSH_AUTOSUGGEST_STRATEGY=(history completion)  # Use history first, then completion for suggestions
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
     ZSH_AUTOSUGGEST_USE_ASYNC=1
     ZSH_AUTOSUGGEST_MANUAL_REBIND=1     # Manual rebind for better performance
     ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"  # Ignore very long commands
-    
+
     # Optimized key bindings
     bindkey '^[[C' forward-char         # Right arrow key
     bindkey '^F' autosuggest-accept     # Ctrl+F to accept suggestion
@@ -54,28 +54,28 @@ fi
 # Source zsh-syntax-highlighting (must be last)
 if [[ -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]]; then
     source "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    
+
     # Optimized syntax highlighting with essential styles only
     ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-    
+
     # Essential highlighting styles (reduced set for performance)
     typeset -A ZSH_HIGHLIGHT_STYLES=(
-        [unknown-token]='fg=red,bold'
-        [reserved-word]='fg=cyan,bold'
-        [alias]='fg=green'
-        [builtin]='fg=green'
-        [function]='fg=green'
-        [command]='fg=green'
-        [precommand]='fg=green,underline'
-        [commandseparator]='fg=blue,bold'
-        [path]='underline'
-        [globbing]='fg=blue'
-        [single-quoted-argument]='fg=yellow'
-        [double-quoted-argument]='fg=yellow'
-        [redirection]='fg=blue,bold'
-        [comment]='fg=black,bold'
-        [bracket-level-1]='fg=blue,bold'
-        [bracket-level-2]='fg=green,bold'
-        [bracket-level-3]='fg=magenta,bold'
+        [unknown-token]="fg=$ZSH_HIGHLIGHT_COLOR_UNKNOWN,bold"
+        [reserved-word]="fg=$ZSH_HIGHLIGHT_COLOR_RESERVED,bold"
+        [alias]="fg=$ZSH_HIGHLIGHT_COLOR_ALIAS"
+        [builtin]="fg=$ZSH_HIGHLIGHT_COLOR_BUILTIN"
+        [function]="fg=$ZSH_HIGHLIGHT_COLOR_FUNCTION"
+        [command]="fg=$ZSH_HIGHLIGHT_COLOR_COMMAND"
+        [precommand]="fg=$ZSH_HIGHLIGHT_COLOR_PRECOMMAND,underline"
+        [commandseparator]="fg=$ZSH_HIGHLIGHT_COLOR_SEPARATOR,bold"
+        [path]="$ZSH_HIGHLIGHT_COLOR_PATH"
+        [globbing]="fg=$ZSH_HIGHLIGHT_COLOR_GLOBBING"
+        [single-quoted-argument]="fg=$ZSH_HIGHLIGHT_COLOR_STRING"
+        [double-quoted-argument]="fg=$ZSH_HIGHLIGHT_COLOR_STRING"
+        [redirection]="fg=$ZSH_HIGHLIGHT_COLOR_REDIRECTION,bold"
+        [comment]="fg=$ZSH_HIGHLIGHT_COLOR_COMMENT,bold"
+        [bracket-level-1]="fg=$ZSH_HIGHLIGHT_COLOR_BRACKET_1,bold"
+        [bracket-level-2]="fg=$ZSH_HIGHLIGHT_COLOR_BRACKET_2,bold"
+        [bracket-level-3]="fg=$ZSH_HIGHLIGHT_COLOR_BRACKET_3,bold"
     )
 fi

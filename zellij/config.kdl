@@ -1,0 +1,80 @@
+// Generated zellij config (KDL) based on .dotter global theme and tmux mappings
+// Theme colors are templated via dotter variables
+
+themes {
+    tokyonight {
+        fg "{{fg_primary}}"
+        bg "{{bg_primary}}"
+        black "{{bg_dark}}"
+        red "{{accent_red}}"
+        green "{{accent_green}}"
+        yellow "{{accent_yellow}}"
+        blue "{{accent_blue}}"
+        magenta "{{accent_magenta}}"
+        cyan "{{accent_cyan}}"
+        white "{{fg_primary}}"
+        orange "{{accent_orange}}"
+    }
+}
+
+theme "tokyonight"
+
+// UI and behavior options
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name false
+    }
+}
+
+// Plugin configuration
+default_layout "compact"
+plugins {
+    tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+}
+
+// General options (like tmux settings)
+scrollback_lines 10000
+copy_on_select true
+mouse_mode true
+pane_viewport_serialization true
+scrollback_lines_to_serialize 10000
+
+// Session options
+session_serialization true
+serialize_pane_viewport true
+
+// Default shell
+default_shell "zsh"
+
+// Default layout
+layout {
+    pane split_direction="vertical" {
+        pane
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+}
+
+// Copy command for clipboard integration (like tmux)
+// Supports both Wayland and X11
+copy_command "wl-copy"
+
+// Start tab/pane numbering at 1 (like tmux base-index)
+// Note: zellij doesn't have direct equivalent, tabs are 1-indexed by default
+

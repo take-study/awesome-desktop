@@ -30,8 +30,13 @@ chmod +x ~/.config/qutebrowser/userscripts/*
 systemctl --user enable swaybg.service
 {{/if}}
 
+{{#if dotter.packages.fuzzel}}
+systemctl --user enable fuzzel-polkit-agent.service
+{{/if}}
+
 {{#if dotter.packages.nvim}}
 {{#if download_dependencies}}
 cp -r dependencies/nvim/* ~/.local/share/nvim/
 {{/if}}
 {{/if}}
+

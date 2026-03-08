@@ -25,7 +25,7 @@ return {
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = {
-            preset = "default",
+            preset = "enter",
             ["<C-f>"] = {
                 function(cmp)
                     cmp.select_next({ count = 5 })
@@ -38,7 +38,6 @@ return {
             },
             ["<C-j>"] = { "select_next", "fallback" },
             ["<C-k>"] = { "select_prev", "fallback" },
-            ["<Tab>"] = { "accept" },
         },
 
         appearance = {

@@ -1,0 +1,72 @@
+[default.variables]
+# Global color scheme variables (Tokyo Night Moon theme)
+# Based on https://github.com/folke/tokyonight.nvim moon variant
+
+# Background colors
+bg_primary = "#222436"
+bg_secondary = "#1e2030"
+bg_tertiary = "#2f334d"
+bg_dark = "#191B29"
+bg_highlight = "#2f334d"
+
+# Foreground colors
+fg_primary = "#c8d3f5"
+fg_secondary = "#828bb8"
+fg_tertiary = "#636da6"
+fg_disabled = "#545c7e"
+fg_gutter = "#3b4261"
+
+# Primary accent colors
+accent_blue = "#82aaff"
+accent_green = "#c3e88d"
+accent_red = "#ff757f"
+accent_yellow = "#ffc777"
+accent_orange = "#ff966c"
+accent_purple = "#fca7ea"
+accent_pink = "#fca7ea"
+accent_cyan = "#86e1fc"
+accent_magenta = "#c099ff"
+
+# Blue variants
+blue0 = "#3e68d7"
+blue1 = "#65bcff"
+blue2 = "#0db9d7"
+blue5 = "#89ddff"
+blue6 = "#b4f9f8"
+blue7 = "#394b70"
+
+# Green variants
+green1 = "#4fd6be"
+green2 = "#41a6b5"
+
+# Red variants
+red1 = "#c53b53"
+
+# Magenta variants
+magenta2 = "#ff007c"
+
+# Additional colors
+teal = "#4fd6be"
+terminal_black = "#444a73"
+
+# Semantic colors
+success = "#c3e88d"
+warning = "#ffc777"
+error = "#ff757f"
+info = "#82aaff"
+
+# Border colors
+border_active = "#82aaff"
+border_inactive = "#2f334d"
+border_default = "#3b4261"
+
+# UI colors
+shadow = "#191B29"
+hover = "#2f334d"
+accent_alt = "#65bcff"
+comment = "#636da6"
+
+# Git colors
+git_add = "#b8db87"
+git_change = "#7ca1f2"
+git_delete = "#e26a75"

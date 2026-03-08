@@ -75,8 +75,11 @@ button:hover, .button:hover, [role="button"]:hover {
     border-color: {{accent_blue}} !important;
 }
 
-a, a:visited {
-    color: {{accent_blue}} !important;
+a {
+    color : {{accent_cyan}} !important;
+} 
+a:visited {
+    color: {{accent_purple}} !important;
 }
 
 a:hover {

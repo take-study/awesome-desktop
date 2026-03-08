@@ -1,11 +1,21 @@
 [default.variables]
 # Global color scheme variables (OneDarkPro theme)
+
+# Background colors
 bg_primary = "#0C0E15"
 bg_secondary = "#1E2127"
 bg_tertiary = "#282C34"
+bg_dark = "#0a0c12"
+bg_highlight = "#2C313C"
+
+# Foreground colors
 fg_primary = "#A7AEBE"
 fg_secondary = "#8A909E"
 fg_tertiary = "#5C6370"
+fg_disabled = "#5C6370"
+fg_gutter = "#4B5263"
+
+# Primary accent colors
 accent_blue = "#61AFEF"
 accent_green = "#98C379"
 accent_red = "#E06C75"
@@ -14,14 +24,26 @@ accent_orange = "#D19A66"
 accent_purple = "#C678DD"
 accent_pink = "#E06C75"
 accent_cyan = "#56B6C2"
+accent_magenta = "#C678DD"
+
+# Semantic colors
 success = "#98C379"
 warning = "#E5C07B"
 error = "#E06C75"
 info = "#61AFEF"
+
+# Border colors
 border_active = "#61AFEF"
 border_inactive = "#282C34"
 border_default = "#282C34"
+
+# UI colors
 shadow = "#0a0c12"
 hover = "#282C34"
 accent_alt = "#4a90e2"
-fg_disabled = "#5C6370"
+comment = "#5C6370"
+
+# Git colors
+git_add = "#98C379"
+git_change = "#61AFEF"
+git_delete = "#E06C75"

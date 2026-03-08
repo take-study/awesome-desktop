@@ -22,6 +22,8 @@ return {
                 json = { "prettier" },
 
                 javascript = { "prettier" },
+
+                c = { "clang-format" },
             },
         })
         vim.api.nvim_create_autocmd("BufWritePre", {

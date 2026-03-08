@@ -5,12 +5,23 @@ return {
     version = "*",
     config = function()
         require("nvim-treesitter").setup({
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "python", "rust" },
+            ensure_installed = {
+                "c",
+                "lua",
+                "vim",
+                "vimdoc",
+                "query",
+                "javascript",
+                "typescript",
+                "python",
+                "rust",
+                "prettier",
+            },
             sync_install = false,
             auto_install = true,
             highlight = {
                 enable = true,
-                additional_vim_regex_highlighting = false,
+                additional_vim_regex_highlighting = true,
             },
         })
         vim.opt.foldenable = false
