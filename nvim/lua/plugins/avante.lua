@@ -23,7 +23,12 @@ return {
         "MunifTanjim/nui.nvim",
         "nvim-telescope/telescope.nvim", -- 用于文件选择器提供者 telescope
         "nvim-tree/nvim-web-devicons", -- 或 echasnovski/mini.icons
-        "zbirenbaum/copilot.lua",
+        {
+            "zbirenbaum/copilot.lua",
+            config = function()
+                require("copilot").setup({})
+            end,
+        },
         -- {
         --     -- 如果您有 lazy=true，请确保正确设置
         --     "MeanderingProgrammer/render-markdown.nvim",

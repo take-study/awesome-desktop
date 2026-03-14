@@ -154,7 +154,7 @@ cmd on-quit &{{
 }}
 
 cmd editor-open &{{
-    sh -c "niri msg action close-window"
+    sh -c "hyprctl dispatch killactive"
     sh -c "editor $f" 
 }}
 

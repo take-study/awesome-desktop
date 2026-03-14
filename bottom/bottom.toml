@@ -119,14 +119,14 @@ theme = "default"
 all_entry_color = "{{accent_blue}}"
 avg_entry_color = "{{accent_green}}"
 cpu_core_colors = [
-    "{{accent_purple}}",
-    "{{accent_yellow}}",
-    "{{accent_cyan}}",
-    "{{accent_green}}",
-    "{{accent_blue}}",
-    "{{accent_orange}}",
-    "{{accent_red}}",
-    "{{accent_pink}}",
+  "{{accent_purple}}",
+  "{{accent_yellow}}",
+  "{{accent_cyan}}",
+  "{{accent_green}}",
+  "{{accent_blue}}",
+  "{{accent_orange}}",
+  "{{accent_red}}",
+  "{{accent_pink}}",
 ]
 
 [styles.memory]

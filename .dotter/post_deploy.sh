@@ -40,3 +40,7 @@ cp -r dependencies/nvim/* ~/.local/share/nvim/
 {{/if}}
 {{/if}}
 
+
+{{#if dotter.packages.xdg-filepicker}}
+systemctl --user restart xdg-desktop-portal.service
+{{/if}}

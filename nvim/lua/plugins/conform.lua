@@ -19,9 +19,7 @@ return {
 
                 sh = { "beautysh" },
 
-                json = { "prettier" },
-
-                javascript = { "prettier" },
+                json = { "clang-format" },
 
                 c = { "clang-format" },
             },

@@ -6,6 +6,7 @@ default_target_type = "automatic"
 "nvim/lua" = "~/.config/nvim/lua"
 "nvim/snippets" = "~/.config/nvim/snippets"
 "scripts/editor.sh" = "~/.local/bin/editor"
+"nvim/nvim.desktop" = "~/.local/share/applications/nvim.desktop"
 
 [alacritty.files]
 "alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
@@ -33,10 +34,11 @@ depends = ["uwsm"]
 "hyprland/variables.conf" = "~/.config/hypr/variables.conf"
 "hyprland/keybinds.conf" = "~/.config/hypr/keybinds.conf"
 "hyprland/windowrules.conf" = "~/.config/hypr/windowrules.conf"
+"hyprland/workspacerule.conf" = "~/.config/hypr/workspacerule.conf"
 "hyprland/hyprlock.conf" = "~/.config/hypr/hyprlock.conf"
 "hyprland/hypridle.conf" = "~/.config/hypr/hypridle.conf"
 "hyprland/hyprpaper.conf" = "~/.config/hypr/hyprpaper.conf"
-"hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/hyprland-portals.conf"
+"hyprland/hyprland-portals.conf" = "~/.config/xdg-desktop-portal/portals.conf"
 "systemd/hypridle.service" = "~/.config/systemd/user/hypridle.service"
 "systemd/hyprpaper.service" = "~/.config/systemd/user/hyprpaper.service"
 "hyprland/hyprland.env" = "~/.config/uwsm/env-hyprland"
@@ -65,7 +67,6 @@ rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 
 [bottom.files]
 "bottom/bottom.toml" = "~/.config/bottom/bottom.toml"
-"scripts/processmanager.sh" = "~/.local/bin/processmanager"
 
 [gtk.files]
 "gtk/settings2.ini" = "~/.gtkrc-2.0"
@@ -73,21 +74,14 @@ rime-id = "0369579c-ee54-42ad-87e2-2ee9b3fdfed1"
 "gtk/settings4.ini" = "~/.config/gtk-4.0/settings.ini"
 "gtk/themes" = "~/.local/share/themes"
 
-[lf.variables]
-lf_wrapper_path = "$HOME/.local/bin/lf-wrapper.sh"
-default_home_dir = "$HOME"
-
 [lf.files]
 "lf/lfrc" = { target = "~/.config/lf/lfrc", type = "symbolic" }
 "lf/scope" = "~/.config/lf/scope"
 "lf/cleaner" = "~/.config/lf/cleaner"
 "lf/icons" = "~/.config/lf/icons"
 "lf/colors" = "~/.config/lf/colors"
-"lf/xdg-filepicker" = { target = "~/.config/lf/xdg-filepicker", type = "symbolic" }
-"lf/xdg-filepicker/config" = "~/.config/xdg-desktop-portal-wlr/config"
-"scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper.sh"
+"scripts/lf-wrapper.sh" = "~/.local/bin/lf-wrapper"
 "lf/lf.desktop" = "~/.local/share/applications/lf.desktop"
-"scripts/filemanager.sh" = "~/.local/bin/filemanager"
 
 [qutebrowser.files]
 "qutebrowser/config.py" = "~/.config/qutebrowser/config.py"
@@ -112,23 +106,25 @@ depends = ["uwsm"]
 "systemd/swaybg.service" = "~/.config/systemd/user/swaybg.service"
 
 [uwsm]
-depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk", "qt"]
+depends = ["foot", "cliphist", "dunst", "fcitx5", "gtk", "qt", "xdg-filepicker"]
 
 [uwsm.files]
 "uwsm/global.env" = "~/.config/uwsm/env"
 "scripts/media-check.sh" = "~/.local/bin/media-check"
 "scripts/volume-control.sh" = "~/.local/bin/volume-control"
+"scripts/terminal.sh" = "~/.local/bin/terminal"
+"scripts/filemanager.sh" = "~/.local/bin/filemanager"
+"scripts/processmanager.sh" = "~/.local/bin/processmanager"
 
 [cliphist.files]
 "systemd/cliphist.service" = "~/.config/systemd/user/cliphist.service"
 
 [foot]
-depends = ["tmux", "lf", "bottom"]
+depends = ["tmux", "bottom"]
 
 [foot.files]
 "foot/foot.ini" = "~/.config/foot/foot.ini"
 "systemd/foot.service" = "~/.config/systemd/user/foot.service"
-"scripts/terminal.sh" = "~/.local/bin/terminal"
 
 [fuzzel.files]
 "fuzzel/fuzzel.ini" = "~/.config/fuzzel/fuzzel.ini"
@@ -137,6 +133,11 @@ depends = ["tmux", "lf", "bottom"]
 
 [qt.files]
 "qt/colors" = "~/.config/qt5ct/colors"
+"qt/colors" = "~/.config/qt6ct/colors"
+"qt/qt6ct.conf" = "~/.config/qt6ct/qt6ct.conf"
 
 [zellij.files]
 "zellij/config.kdl" = "~/.config/zellij/config.kdl"
+
+[xdg-filepicker.files]
+"xdg-protal/config" = "~/.config/xdg-desktop-portal-termfilechooser/config"

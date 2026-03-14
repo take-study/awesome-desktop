@@ -52,8 +52,7 @@ italic = { family = "{{font}}", style = "Regular" }
 # Bold italic font face
 bold_italic = { family = "{{font}}", style = "Bold" }
 
-# Point size
-size = {{font_size}}
+size = {{font_size}}# Point size
 
 # Offset is the extra space around each character
 offset = { x = 0, y = 0 }
@@ -165,34 +164,34 @@ hide_when_typing = true
 [keyboard]
 # Key bindings
 bindings = [
-    # Copy/Paste
-    { key = "V", mods = "Control|Shift", action = "Paste" },
-    { key = "C", mods = "Control|Shift", action = "Copy" },
-    { key = "Insert", mods = "Shift", action = "PasteSelection" },
+  # Copy/Paste
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "Insert", mods = "Shift", action = "PasteSelection" },
 
-    # Search
-    { key = "F", mods = "Control|Shift", action = "SearchForward" },
-    { key = "B", mods = "Control|Shift", action = "SearchBackward" },
+  # Search
+  { key = "F", mods = "Control|Shift", action = "SearchForward" },
+  { key = "B", mods = "Control|Shift", action = "SearchBackward" },
 
-    # Font size
-    { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
-    { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
-    { key = "Key0", mods = "Control", action = "ResetFontSize" },
+  # Font size
+  { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "Key0", mods = "Control", action = "ResetFontSize" },
 
-    # Scrolling
-    { key = "PageUp", mods = "Shift", action = "ScrollPageUp" },
-    { key = "PageDown", mods = "Shift", action = "ScrollPageDown" },
-    { key = "Home", mods = "Shift", action = "ScrollToTop" },
-    { key = "End", mods = "Shift", action = "ScrollToBottom" },
+  # Scrolling
+  { key = "PageUp", mods = "Shift", action = "ScrollPageUp" },
+  { key = "PageDown", mods = "Shift", action = "ScrollPageDown" },
+  { key = "Home", mods = "Shift", action = "ScrollToTop" },
+  { key = "End", mods = "Shift", action = "ScrollToBottom" },
 
-    # Vi mode
-    { key = "Space", mods = "Shift|Control", action = "ToggleViMode" },
+  # Vi mode
+  { key = "Space", mods = "Shift|Control", action = "ToggleViMode" },
 
-    # New instance
-    { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+  # New instance
+  { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
 
-    # Quit
-    { key = "Q", mods = "Control|Shift", action = "Quit" },
+  # Quit
+  { key = "Q", mods = "Control|Shift", action = "Quit" },
 ]
 
 [debug]

@@ -1,3 +1,0 @@
-[filechooser]
-cmd={{lf_wrapper_path}}
-default_dir={{default_home_dir}}
